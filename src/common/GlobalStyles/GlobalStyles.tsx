@@ -4,9 +4,13 @@ import Colors from "./Colors";
 const GlobalStyles = createGlobalStyle`
   body {
     background-color: ${Colors.veryDarkBlue};
-    color: ${Colors.black};
+    color: ${Colors.white};
     font-family: 'Nunito Sans';
     font-weight: 400;
+
+    input, select {
+      font-family: 'Nunito Sans';
+    }
   }
 `;
 

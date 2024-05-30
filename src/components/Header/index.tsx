@@ -9,7 +9,7 @@ const HeaderContainer = styled.header`
   flex-direction: column;
   justify-content: center;
   background-color: ${Colors.darkBlue};
-  box-shadow: 0px -4px 18px -4px ${Colors.charcoalBlue};
+  box-shadow: 0rem -0.25rem 1.125rem -0.25rem ${Colors.charcoalBlue};
   height: 100px;
   margin-bottom: 1.875rem;
 
@@ -23,6 +23,7 @@ const HeaderContainer = styled.header`
 
   @media (min-width: 768px) {
     height: 80px;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -35,13 +36,14 @@ const ContentWrapper = styled.div`
   @media (min-width: 992px) {
     margin: 0 auto;
     width: 80%;
+    max-width: 1200px;
   }
 `;
 
 const Title = styled.h2`
   color: ${Colors.white};
   font-size: 1.0625rem;
-  font-weight: 900;
+  font-weight: 800;
 
   @media (min-width: 768px) {
     font-size: 1.5rem;
@@ -58,7 +60,7 @@ const DarkModeLabel = styled.label`
   font-size: .875rem;
   font-weight: 500;
 
-  transition: all .3s ease-in-out;
+  transition: all .2s ease-in-out;
 
   &:hover {
     color: ${Colors.darkGrayHover};
@@ -69,10 +71,10 @@ const DarkModeLabel = styled.label`
   }
 
   &:active {
-    color: #678098;
+    color: ${Colors.veryDarkBlueActive};
 
     path {
-      fill: #678098;
+      fill: ${Colors.veryDarkBlueActive};
     }
   }
 
