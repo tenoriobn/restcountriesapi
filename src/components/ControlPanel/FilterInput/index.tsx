@@ -45,7 +45,7 @@ const Input = styled.input`
   }
 `;
 
-const Label = styled.div`
+const Label = styled.label`
   position: absolute;
   padding: 0 2rem;
   font-size: 1rem;
@@ -56,8 +56,8 @@ const Label = styled.div`
 export default function FilterInput() {
   return (
     <FilterInputWrapper>
-      <Input type="text" required />
-      <Label className="labelline">Search for a country...</Label>
+      <Input type="text" id="filter-country" required />
+      <Label className="labelline" htmlFor="filter-country">Search for a country...</Label>
     </FilterInputWrapper>
   );
 }
