@@ -100,7 +100,7 @@ const MoonIcon = styled(Moon)`
 
 export default function Header() {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
-  console.log(darkMode);
+  console.log('DarkMode: ', darkMode);
 
   return (
     <HeaderContainer>

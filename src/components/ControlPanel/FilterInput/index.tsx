@@ -38,7 +38,7 @@ const Input = styled.input`
     color: ${Colors.white};
     height: 30px;
     line-height: 1.875rem;
-    transform: translate(17px, -18px) scale(0.88);
+    transform: translate(16px, -18px) scale(0.88);
     z-index: 6;
     padding: 0 .5rem;
     transition: all .2s ease-in-out;

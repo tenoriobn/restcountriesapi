@@ -1,110 +1,171 @@
 import styled from "styled-components";
 import Colors from "../../../common/GlobalStyles/Colors";
 import { IFilterSelect } from "../../../common/interfaces/IFilterSelect";
+import Arrow from "./assets/select-arrow.svg?react";
+import { useEffect, useState } from "react";
 
-const FilterSelectWrapper = styled.div`
-  background-color: ${Colors.darkBlue};
-  border-radius: .375rem;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
-  line-height: 3.625rem;
+const Container = styled.div`
   position: relative;
-  height: 56px;
+  display: flex;
+  flex-direction: column;
+  row-gap: .25rem;
+  
+  cursor: pointer;
+
   max-width: 248px;
   width: 100%;
 `;
 
-const Select = styled.select`
-  appearance: none;
-  outline: none;
-  border: none;
-  position: absolute;
-  background-color: transparent;
+const FilterSelectWrapper = styled.div<{ $optionSelect: IFilterSelect | null; $openListOptions: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: ${Colors.darkBlue};
   border-radius: .375rem;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
   box-sizing: border-box;
-  color: ${Colors.white};
+  line-height: 3.625rem;
+
+  position: relative;
+  height: 56px;
+  
+  padding: 0 1.25rem 0 1.5rem;
+
+  ${props => (props.$optionSelect || props.$openListOptions) ? 
+    `
+      border: .125rem solid #d1d1d1;
+      background-color: #202c37;
+      box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
+    ` : '' }
+`;
+
+const Label = styled.label<{ $optionSelect: IFilterSelect | null; $openListOptions: boolean }>`
+  position: absolute;
   cursor: pointer;
   font-size: 1rem;
   font-weight: 500;
-  width: 100%;
-  padding: 1.0625rem 2rem;
-  z-index: 5;
-
-  &:focus, &:valid {
-    border: .125rem solid ${Colors.darkGrayHover};
-    background-color: #202c37;
-    box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
-
-    .empty-option {
-      display: none;
-    }
-  }
+  line-height: normal;
+  transition: all .2s ease-in-out;
   
-  &:focus + .labelline, &:valid + .labelline {
-    background: ${Colors.veryDarkBlue};
-    color: ${Colors.white};
-    height: 30px;
-    line-height: 1.875rem;
-    transform: translate(17px, -18px) scale(0.88);
-    z-index: 6;
-    padding: 0 .5rem;
-    transition: all .2s ease-in-out;
-  }
+  ${props => (props.$optionSelect || props.$openListOptions) ? 
+    `
+      background: #202c37;
+      padding: 0 .5rem;
+      transform: translate(-16px, -30px) scale(0.88);
+      z-index: 6;
+    ` : '' }
 `;
 
-const Label = styled.label`
+const ListOptions = styled.ul<{ open: boolean }>`
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  background-color: ${Colors.darkBlue};
+  border-radius: .375rem;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+
+  padding:  ${props => props.open ? '1rem 0rem' : '0rem'};
+  height:  ${props => props.open ? '192px' : '0px'};
+  width: 100%;
+  
   position: absolute;
-  padding: 0 2rem;
-  font-size: 1rem;
-  font-weight: 500;
+  overflow: hidden;
+  top: 60px;
   transition: all .2s ease-in-out;
 `;
 
+const Options = styled.li`
+  cursor: pointer;
+  padding: 8px 1.5rem;
+  transition: all .2s ease-in-out;
+  
+  &:hover {
+    background-color: #e6e6e611;
+  }
+`;
+
+const SelectArrowIcon = styled(Arrow)<{ $openListOptions: boolean }>`
+  transform:  ${props => props.$openListOptions ? 'rotate(180deg)' : ''};
+  transition: all .2s ease-in-out;
+  width: 10px;
+`;
+
+const options:IFilterSelect[] = [
+  {
+    id: 1,
+    value: 'Africa'
+  },
+  {
+    id: 2,
+    value: 'América'
+  },
+  {
+    id: 3,
+    value: 'Asia'
+  },
+  {
+    id: 4,
+    value: 'Europe'
+  },
+  {
+    id: 5,
+    value: 'Oceania'
+  },
+];
+
 export default function FilterSelect() {
-  const options:IFilterSelect[] = [
-    {
-      id: 0,
-      value: '',
-      label: '',
-      class: 'empty-option',
-    },
-    {
-      id: 1,
-      value: 'africa',
-      label: 'Africa'
-    },
-    {
-      id: 2,
-      value: 'america',
-      label: 'América'
-    },
-    {
-      id: 3,
-      value: 'asia',
-      label: 'Asia'
-    },
-    {
-      id: 4,
-      value: 'europe',
-      label: 'Europe'
-    },
-    {
-      id: 5,
-      value: 'oceania',
-      label: 'Oceania'
-    },
-  ];
+  const [openListOptions, setOpenListOptions] = useState(false);
+  const [optionSelected, setOptionSelected] = useState<IFilterSelect | null>(null);
+  console.log('optionSelected: ', optionSelected?.value);
+
+  const handleOptionSelected = (option: IFilterSelect) => {
+    setOptionSelected(option);
+    setOpenListOptions(false);
+  };
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const clickedOutsideContainer = event.target as HTMLElement;
+      if (!clickedOutsideContainer.closest('#filter-select-container')) {
+        setOpenListOptions(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, []);
 
   return (
-    <FilterSelectWrapper>
-      <Select name="filter-region" id="filter-region" required>
-        {options.map(option => (
-          <option key={option.id} value={option.value} className={option.class}>
-            {option.label}
-          </option>
-        ))}
-      </Select>
+    <Container id="filter-select-container">
+      <FilterSelectWrapper 
+        onClick={() => setOpenListOptions(!openListOptions)}
+        $optionSelect={optionSelected}
+        $openListOptions={openListOptions}
+      >
+        <Label 
+          className="labelline" 
+          $optionSelect={optionSelected}
+          $openListOptions={openListOptions}
+        >
+          Filter by Region
+        </Label>
 
-      <Label className="labelline" htmlFor="filter-region">Filter by Region</Label>
-    </FilterSelectWrapper>
+        <p>{optionSelected ? optionSelected.value : ''}</p>
+        <SelectArrowIcon $openListOptions={openListOptions} />
+      </FilterSelectWrapper>
+
+      <ListOptions open={openListOptions}>
+        {options.map(option => (
+          <Options key={option.id} onClick={() => handleOptionSelected(option)}>
+            {option.value}
+          </Options>
+        ))}
+      </ListOptions>
+    </Container>
   );
 }
