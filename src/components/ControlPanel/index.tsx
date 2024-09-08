@@ -5,12 +5,12 @@ import FilterSelect from "./FilterSelect";
 const ControlPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3.125rem;
+  gap: 2.375rem;
 
   @media (min-width: 768px) {
     flex-direction: row;
-    /* align-items: center; */
     justify-content: space-between;
+    gap: 3.125rem;
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CardTest from "../components/CardTest";
+import CountryCard from "../components/CountryCard";
 import ControlPanel from "../components/ControlPanel";
 
 const MainContainer = styled.main`
@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <MainContainer>
       <ControlPanel />
-      <CardTest />
+      <CountryCard />
     </MainContainer>
   );
 }
