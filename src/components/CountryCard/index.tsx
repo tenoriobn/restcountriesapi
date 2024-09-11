@@ -1,8 +1,16 @@
 import styled from "styled-components";
 import Colors from "../../common/GlobalStyles/Colors";
-import bandeiraAlemanha from "../../../public/img/Bandeira-da-Alemanha-2000px.png";
+import { useQuery } from "@tanstack/react-query";
+import { getApi } from "../../utils/http";
+import { ICountry } from "../../common/types/ICountry";
 
+
+// Correções desse componente
 // REFATORAR ESPAÇAMENTO DAS INFORMAÇÕES DENTRO DO CARD, BEM COMO O TAMANHO DAS FONTES E ESPAÇO DAS LINHAS.
+// ENQUADRAR IMAGENS CORRETAMENTE NO CARD, POIS ESTÃO SENDO CORTADAS;
+// No lugar de `Carregando...` colocar o `skeleton`
+
+
 
 const CountryCardsContainer = styled.div`
   display: grid;
@@ -17,6 +25,8 @@ const CountryCardsContainer = styled.div`
     img {
       border-radius: .375rem .375rem 0 0;
       width: 100%;
+      height: 208px;
+      object-fit: cover;
     }
   }
 `;
@@ -48,78 +58,33 @@ const CountryDetails = styled.section`
 `;
 
 export default function CountryCard() {
+  const { data: countries = [], isLoading } = useQuery<ICountry[]>({
+    queryFn: getApi('all?fields=flags,name,population,region,capital'),
+    queryKey: ['countries-data']
+  });
+
+  console.log('countries: ', countries);
+
+  if (isLoading) {
+    return `Carregando...`;
+  }
 
   return (
     <CountryCardsContainer>
-      <article>
-        <img src={bandeiraAlemanha} alt={`Bandeira da Alemanha -PAIS dinâmico AQUI-`} />
-
-        <CountryDetails>
-          <h2>Germany</h2>
-
-          <div>
-            <p><span>Population: </span>81,770,900</p>
-            <p><span>Region: </span>Europa</p>
-            <p><span>Capital: </span>Berlin</p>
-          </div>
-        </CountryDetails>
-      </article>
-
-      <article>
-        <img src={bandeiraAlemanha} alt={`Bandeira da Alemanha -PAIS dinâmico AQUI-`} />
-
-        <CountryDetails>
-          <h2>Germany</h2>
-
-          <div>
-            <p><span>Population: </span>81,770,900</p>
-            <p><span>Region: </span>Europa</p>
-            <p><span>Capital: </span>Berlin</p>
-          </div>
-        </CountryDetails>
-      </article>
-
-      <article>
-        <img src={bandeiraAlemanha} alt={`Bandeira da Alemanha -PAIS dinâmico AQUI-`} />
-
-        <CountryDetails>
-          <h2>Germany</h2>
-
-          <div>
-            <p><span>Population: </span>81,770,900</p>
-            <p><span>Region: </span>Europa</p>
-            <p><span>Capital: </span>Berlin</p>
-          </div>
-        </CountryDetails>
-      </article>
-
-      <article>
-        <img src={bandeiraAlemanha} alt={`Bandeira da Alemanha -PAIS dinâmico AQUI-`} />
-
-        <CountryDetails>
-          <h2>Germany</h2>
-
-          <div>
-            <p><span>Population: </span>81,770,900</p>
-            <p><span>Region: </span>Europa</p>
-            <p><span>Capital: </span>Berlin</p>
-          </div>
-        </CountryDetails>
-      </article>
-
-      <article>
-        <img src={bandeiraAlemanha} alt={`Bandeira da Alemanha -PAIS dinâmico AQUI-`} />
-
-        <CountryDetails>
-          <h2>Germany</h2>
-
-          <div>
-            <p><span>Population: </span>81,770,900</p>
-            <p><span>Region: </span>Europa</p>
-            <p><span>Capital: </span>Berlin</p>
-          </div>
-        </CountryDetails>
-      </article>
+      {countries.map((country) => (
+        <article key={country.name.common}>
+          <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
+          
+          <CountryDetails>
+            <h2>{country.name.common}</h2>
+            <div>
+              <p><span>Population: </span>{country.population}</p>
+              <p><span>Region: </span>{country.region}</p>
+              <p><span>Capital: </span>{country.capital.join(', ')}</p>
+            </div>
+          </CountryDetails>
+        </article>
+      ))}
     </CountryCardsContainer>
   );
 }
