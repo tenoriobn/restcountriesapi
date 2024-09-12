@@ -3,39 +3,55 @@ import Colors from "../../common/GlobalStyles/Colors";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "../../utils/http";
 import { ICountry } from "../../common/types/ICountry";
-
-
-// Correções desse componente
-// REFATORAR ESPAÇAMENTO DAS INFORMAÇÕES DENTRO DO CARD, BEM COMO O TAMANHO DAS FONTES E ESPAÇO DAS LINHAS.
-// ENQUADRAR IMAGENS CORRETAMENTE NO CARD, POIS ESTÃO SENDO CORTADAS;
-// No lugar de `Carregando...` colocar o `skeleton`
-
-
+import { Link } from "react-router-dom";
 
 const CountryCardsContainer = styled.div`
   display: grid;
-  gap: 3.125rem;
+  justify-content: center;
+  gap: 4.625rem;
   margin-top: 3.125rem;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
-  article {
-    border-radius: .375rem;
-    background-color: ${Colors.darkBlue};
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
-    img {
-      border-radius: .375rem .375rem 0 0;
-      width: 100%;
-      height: 208px;
-      object-fit: cover;
+  a {
+    text-decoration: none;
+    justify-self: center;
+    min-height: 338px;
+    max-width: 328px;
+    width: 100%;
+
+    article {
+      display: inherit;
+      border-radius: .375rem;
+      background-color: ${Colors.darkBlue};
+
+      img {
+        border-radius: .375rem .375rem 0 0;
+        width: 100%;
+        height: 198px;
+        object-fit: cover;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    a {
+      article {
+        img {
+          height: 160px;
+        }
+      }
     }
   }
 `;
 
 const CountryDetails = styled.section`
-  padding: 2.125rem 2rem;
+  padding: 2.25rem 1.875rem 3.625rem 1.875rem;
 
   h2 {
-    color: ${Colors.darkGray};
+    color: ${Colors.white};
     font-size: 1.375rem;
     font-weight: 800;
     margin-bottom: 2rem;
@@ -44,15 +60,33 @@ const CountryDetails = styled.section`
   div {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
 
     p {
-      font-size: 1rem;
+      font-size: 1.125rem;
       font-weight: 400;
+      color: white;
     }
     
     p span {
       font-weight: 700;
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding: 1.875rem 1.5rem 3.125rem 1.5rem;
+
+    h2 {
+      font-size: 1.125rem;
+      margin-bottom: 1.625rem;
+    }
+
+    div {
+      gap: .875rem;
+
+      p {
+        font-size: .875rem;
+      }
     }
   }
 `;
@@ -72,18 +106,21 @@ export default function CountryCard() {
   return (
     <CountryCardsContainer>
       {countries.map((country) => (
-        <article key={country.name.common}>
-          <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
-          
-          <CountryDetails>
-            <h2>{country.name.common}</h2>
-            <div>
-              <p><span>Population: </span>{country.population}</p>
-              <p><span>Region: </span>{country.region}</p>
-              <p><span>Capital: </span>{country.capital.join(', ')}</p>
-            </div>
-          </CountryDetails>
-        </article>
+        
+        <Link to="/" key={country.name.common}>        
+          <article>
+            <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
+            
+            <CountryDetails>
+              <h2>{country.name.common}</h2>
+              <div>
+                <p><span>Population: </span>{country.population}</p>
+                <p><span>Region: </span>{country.region}</p>
+                <p><span>Capital: </span>{country.capital}</p>
+              </div>
+            </CountryDetails>
+          </article>
+        </Link>
       ))}
     </CountryCardsContainer>
   );
