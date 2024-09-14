@@ -14,6 +14,10 @@ const Container = styled.div`
 
   max-width: 248px;
   width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 200px;
+  }
 `;
 
 const FilterSelectWrapper = styled.div<{ $optionSelect: IFilterSelect | null; $openListOptions: boolean }>`

@@ -22,11 +22,11 @@ const CountryCardsContainer = styled.div`
 
     article {
       display: inherit;
-      border-radius: .375rem;
       background-color: ${Colors.darkBlue};
+      border-radius: .375rem;
+      overflow: auto;
 
       img {
-        border-radius: .375rem .375rem 0 0;
         width: 100%;
         height: 198px;
         object-fit: cover;
@@ -97,15 +97,13 @@ export default function CountryCard() {
     queryKey: ['countries-data']
   });
 
-  console.log('countries: ', countries);
-
   if (isLoading) {
     return `Carregando...`;
   }
 
   return (
     <CountryCardsContainer>
-      {countries.map((country) => (
+      {countries.slice(0, 8).map((country) => (
         
         <Link to="/" key={country.name.common}>        
           <article>
@@ -116,7 +114,7 @@ export default function CountryCard() {
               <div>
                 <p><span>Population: </span>{country.population}</p>
                 <p><span>Region: </span>{country.region}</p>
-                <p><span>Capital: </span>{country.capital}</p>
+                <p><span>Capital: </span>{country.capital.join(', ')}</p>
               </div>
             </CountryDetails>
           </article>
