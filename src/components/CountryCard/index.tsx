@@ -105,7 +105,7 @@ export default function CountryCard() {
     <CountryCardsContainer>
       {countries.slice(0, 8).map((country) => (
         
-        <Link to="/" key={country.name.common}>        
+        <Link to="/overview" key={country.name.common}>        
           <article>
             <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
             
