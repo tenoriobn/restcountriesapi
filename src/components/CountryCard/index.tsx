@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Colors from "../../common/GlobalStyles/Colors";
-import { useQuery } from "@tanstack/react-query";
-import { getApi } from "../../utils/http";
-import { ICountry } from "../../common/types/ICountry";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { selectedCountryState } from "../../common/states/atom";
+import { useFilteredCountries } from "../../common/states/hook/useFilteredCountries";
 
 const CountryCardsContainer = styled.div`
   display: grid;
@@ -92,10 +92,8 @@ const CountryDetails = styled.section`
 `;
 
 export default function CountryCard() {
-  const { data: countries = [], isLoading } = useQuery<ICountry[]>({
-    queryFn: getApi('all?fields=flags,name,population,region,capital'),
-    queryKey: ['countries-data']
-  });
+  const setSelectedCountry = useSetRecoilState(selectedCountryState);
+  const { filteredCountries, isLoading } = useFilteredCountries();
 
   if (isLoading) {
     return `Carregando...`;
@@ -103,16 +101,20 @@ export default function CountryCard() {
 
   return (
     <CountryCardsContainer>
-      {countries.slice(0, 8).map((country) => (
+      {filteredCountries.slice(0, 8).map((country) => (
         
-        <Link to="/overview" key={country.name.common}>        
+        <Link 
+          to="/overview" 
+          key={country.name.common}
+          onClick={() => setSelectedCountry(country)}
+        >        
           <article>
             <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
             
             <CountryDetails>
               <h2>{country.name.common}</h2>
               <div>
-                <p><span>Population: </span>{country.population}</p>
+                <p><span>Population: </span>{country.population.toLocaleString('en-US')}</p>
                 <p><span>Region: </span>{country.region}</p>
                 <p><span>Capital: </span>{country.capital.join(', ')}</p>
               </div>

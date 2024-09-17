@@ -2,11 +2,9 @@ import styled from "styled-components";
 import Colors from "../common/GlobalStyles/Colors";
 import ArrowIcon from "../../public/icons/Arrow-left.svg?react";
 import { Button } from "../common/GlobalStyles/GlobalStyles";
-
-// Tornar responsivo (estrutura +  tamanho de textos e etc)
-// Trazer informações de dados dinâmicos
-// Ao clicar no botão do Border Countries, rnederizar informações do país cujo o botão foi clicado
-// Verficiar processo para lidar com botões cujo o texto é muito grande para não quebrar layout
+import { useRecoilState } from "recoil";
+import { selectedCountryState } from "../common/states/atom";
+import { useCountryNamesFromCodes } from "../common/states/hook/useCountryNamesFromCodes";
 
 export const StylizedButton = styled(Button)`
   font-size: 1.125rem;
@@ -102,6 +100,18 @@ const BorderCountries = styled.div`
 `;
 
 export default function CountryOverview() {
+  const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
+  const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
+
+  const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
+
+  if (isLoading) {
+    return `Carregando...`;
+  }
+
+  console.log('country', country);
+  console.log('borderCountriesData', borderCountriesData);
+
   return (
     <div>
       <StylizedButton to="/">
@@ -109,35 +119,50 @@ export default function CountryOverview() {
         Back
       </StylizedButton>
 
-      <CountryFlag src="img/Bandeira-da-Alemanha-2000px.png" alt="" style={{ width: "100%" }} />
+      <CountryFlag src={country?.flags.svg} alt={`Bandeira - ${country?.name.common}`} />
 
       <CountryDetails>
-        <h2>Belgium</h2>
+        <h2>{country?.name.common}</h2>
 
         <div>
-          <p><span>Native Name: </span>Belgie</p>
-          <p><span>Population: </span>11,319,511</p>
-          <p><span>Region: </span>Europe</p>
-          <p><span>Sub Region: </span>Western Europe</p>
-          <p><span>Capital: </span>Brussels</p>
+          <p><span>Native Name: </span>{country?.name.official}</p>
+          <p><span>Population: </span>{country?.population.toLocaleString('en-US')}</p>
+          <p><span>Region: </span>{country?.region}</p>
+          <p><span>Sub Region: </span>{country?.subregion}</p>
+          <p><span>Capital: </span>{country?.capital.join(', ')}</p>
         </div>
 
         <div className="country-Info-wrapper">
-          <p><span>Top Level Domain: </span>.be</p>
-          <p><span>Currencies: </span>Euro</p>
-          <p><span>Languages: </span>Dutch, French, German</p>
+          <p><span>Top Level Domain: </span>{country?.tld[0]}</p>
+          <p>
+            <span>Currencies: </span>
+            {
+              country?.currencies &&
+              Object.values(country.currencies).length > 0 &&
+              (Object.values(country.currencies)[0] as { name: string }).name
+            }
+          </p>
+          <p><span>Languages: </span>{country?.languages ? Object.values(country.languages).join(', ') : 'N/A'}</p>
         </div>
       </CountryDetails>
 
-      <BorderCountries>
-        <h2>Border Countries:</h2>
+      {borderCountriesData.length > 0 && (
+        <BorderCountries>
+          <h2>Border Countries:</h2>
 
-        <div>
-          <Button to="#">France</Button>
-          <Button to="#">Germany</Button>
-          <Button to="#">Netherlands</Button>
-        </div>
-      </BorderCountries>
+          <div>
+            {borderCountriesData.slice(0, 3).map((borderCountry, index) => (
+              <Button 
+                to="#" 
+                key={index} 
+                onClick={() => setSelectedCountry(borderCountry)}
+              >
+                {borderCountry.name.common}
+              </Button>
+            ))}
+          </div>
+        </BorderCountries>
+      )}
     </div>
   );
 }

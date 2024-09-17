@@ -15,10 +15,26 @@ export interface IName {
   };
 }
 
+export interface ICurrencies {
+  [key: string]: {
+    name: string;
+    symbol: string;
+  }
+}
+
+export interface ILanguages {
+  [key: string]: string;
+}
+
 export interface ICountry {
   flags: IFlags;
   name: IName;
-  capital: string[];
-  region: string;
   population: number;
+  region: string;
+  subregion: string;
+  capital: string[];
+  tld: string[];
+  currencies: ICurrencies;
+  languages: string[];
+  borders: string[];
 }
