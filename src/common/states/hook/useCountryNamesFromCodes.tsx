@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getApi } from '../../../utils/http';
-import { ICountry } from '../../types/ICountry';
+import { ICountry } from '../../interfaces/ICountry';
 
 export function useCountryNamesFromCodes(country?: ICountry) {
   // Extrai os códigos dos países fronteiriços e transforma em uma string separada por vírgulas

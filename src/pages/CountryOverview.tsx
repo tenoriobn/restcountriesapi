@@ -102,7 +102,6 @@ const BorderCountries = styled.div`
 export default function CountryOverview() {
   const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
   const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
-
   const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
 
   if (isLoading) {

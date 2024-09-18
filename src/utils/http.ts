@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICountry } from "../common/types/ICountry";
+import { ICountry } from "../common/interfaces/ICountry";
 
 const http = axios.create({
   baseURL: 'https://restcountries.com/v3.1/',
@@ -14,4 +14,9 @@ export const getApi = (endpoint: string) => {
     const response = await http.get<ICountry[]>(endpoint);
     return response.data;
   };
+};
+
+export const getApiSearch = async (endpoint: string): Promise<ICountry[]> => {
+  const response = await http.get<ICountry[]>(endpoint);
+  return response.data;
 };

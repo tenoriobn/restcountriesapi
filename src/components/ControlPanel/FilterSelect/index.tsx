@@ -3,6 +3,8 @@ import Colors from "../../../common/GlobalStyles/Colors";
 import { IFilterSelect } from "../../../common/interfaces/IFilterSelect";
 import Arrow from "./assets/select-arrow.svg?react";
 import { useEffect, useState } from "react";
+import { countryFilterState } from "../../../common/states/atom";
+import { useRecoilState } from "recoil";
 
 const Container = styled.div`
   position: relative;
@@ -122,10 +124,17 @@ const options:IFilterSelect[] = [
 export default function FilterSelect() {
   const [openListOptions, setOpenListOptions] = useState(false);
   const [optionSelected, setOptionSelected] = useState<IFilterSelect | null>(null);
+  const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
   console.log('optionSelected: ', optionSelected?.value);
 
   const handleOptionSelected = (option: IFilterSelect) => {
     setOptionSelected(option);
+
+    setCountryFilter({ 
+      ...countryFilter, 
+      select: option.value === "América" ? "Americas" : option.value 
+    });
+
     setOpenListOptions(false);
   };
 

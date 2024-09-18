@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Colors from "../../common/GlobalStyles/Colors";
 import { Link } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { selectedCountryState } from "../../common/states/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { countryFilterState, selectedCountryState } from "../../common/states/atom";
 import { useFilteredCountries } from "../../common/states/hook/useFilteredCountries";
 
 const CountryCardsContainer = styled.div`
@@ -93,7 +93,10 @@ const CountryDetails = styled.section`
 
 export default function CountryCard() {
   const setSelectedCountry = useSetRecoilState(selectedCountryState);
-  const { filteredCountries, isLoading } = useFilteredCountries();
+  const countryFilter = useRecoilValue(countryFilterState);
+  const { filteredCountries, isLoading } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
+
+  console.log('countryFilter: ', countryFilter);
 
   if (isLoading) {
     return `Carregando...`;
@@ -101,7 +104,7 @@ export default function CountryCard() {
 
   return (
     <CountryCardsContainer>
-      {filteredCountries.slice(0, 8).map((country) => (
+      {filteredCountries.map((country) => (
         
         <Link 
           to="/overview" 
