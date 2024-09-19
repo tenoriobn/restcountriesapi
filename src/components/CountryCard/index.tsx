@@ -9,7 +9,7 @@ const CountryCardsContainer = styled.div`
   display: grid;
   justify-content: center;
   gap: 4.625rem;
-  margin-top: 3.125rem;
+  margin: 3.125rem 0;
 
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 

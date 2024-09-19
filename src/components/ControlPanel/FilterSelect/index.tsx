@@ -22,7 +22,7 @@ const Container = styled.div`
   }
 `;
 
-const FilterSelectWrapper = styled.div<{ $optionSelect: IFilterSelect | null; $openListOptions: boolean }>`
+const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openListOptions: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -46,7 +46,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: IFilterSelect | null; $o
     ` : '' }
 `;
 
-const Label = styled.label<{ $optionSelect: IFilterSelect | null; $openListOptions: boolean }>`
+const Label = styled.label<{ $optionSelect: string | null; $openListOptions: boolean }>`
   position: absolute;
   cursor: pointer;
   font-size: 1rem;
@@ -73,22 +73,26 @@ const ListOptions = styled.ul<{ open: boolean }>`
   box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
 
   padding:  ${props => props.open ? '1rem 0rem' : '0rem'};
-  height:  ${props => props.open ? '192px' : '0px'};
+  height:  ${props => props.open ? 'max-content' : '0px'};
   width: 100%;
   
   position: absolute;
   overflow: hidden;
   top: 60px;
-  transition: all .2s ease-in-out;
+  /* transition: all .2s ease-in; */
 `;
 
 const Options = styled.li`
   cursor: pointer;
-  padding: 8px 1.5rem;
+  padding: .5rem 1.5rem;
   transition: all .2s ease-in-out;
+
+  &.active {
+    background-color: ${Colors.lightGrayActive}!important;
+  }
   
   &:hover {
-    background-color: #e6e6e611;
+    background-color: ${Colors.lightGrayHover};
   }
 `;
 
@@ -100,43 +104,40 @@ const SelectArrowIcon = styled(Arrow)<{ $openListOptions: boolean }>`
 
 const options:IFilterSelect[] = [
   {
+    id: 0,
+    value: '',
+    name: 'Remove Filter'
+  },
+  {
     id: 1,
-    value: 'Africa'
+    value: 'Africa',
+    name: 'Africa'
   },
   {
     id: 2,
-    value: 'América'
+    value: 'Americas',
+    name: 'América'
   },
   {
     id: 3,
-    value: 'Asia'
+    value: 'Asia',
+    name: 'Asia'
   },
   {
     id: 4,
-    value: 'Europe'
+    value: 'Europe',
+    name: 'Europe'
   },
   {
     id: 5,
-    value: 'Oceania'
+    value: 'Oceania',
+    name: 'Oceania'
   },
 ];
 
 export default function FilterSelect() {
   const [openListOptions, setOpenListOptions] = useState(false);
-  const [optionSelected, setOptionSelected] = useState<IFilterSelect | null>(null);
   const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
-  console.log('optionSelected: ', optionSelected?.value);
-
-  const handleOptionSelected = (option: IFilterSelect) => {
-    setOptionSelected(option);
-
-    setCountryFilter({ 
-      ...countryFilter, 
-      select: option.value === "América" ? "Americas" : option.value 
-    });
-
-    setOpenListOptions(false);
-  };
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -157,27 +158,37 @@ export default function FilterSelect() {
     <Container id="filter-select-container">
       <FilterSelectWrapper 
         onClick={() => setOpenListOptions(!openListOptions)}
-        $optionSelect={optionSelected}
+        $optionSelect={countryFilter ? countryFilter.select ?? null : null}
         $openListOptions={openListOptions}
       >
         <Label 
           className="labelline" 
-          $optionSelect={optionSelected}
+          $optionSelect={countryFilter ? countryFilter.select ?? null : null}
           $openListOptions={openListOptions}
         >
           Filter by Region
         </Label>
 
-        <p>{optionSelected ? optionSelected.value : ''}</p>
+        <p>{countryFilter && countryFilter.select ? countryFilter.select : ''}</p>
         <SelectArrowIcon $openListOptions={openListOptions} />
       </FilterSelectWrapper>
 
       <ListOptions open={openListOptions}>
-        {options.map(option => (
-          <Options key={option.id} onClick={() => handleOptionSelected(option)}>
-            {option.value}
-          </Options>
-        ))}
+        {
+          (countryFilter && countryFilter.select ? options : options.filter(option => option.id !== 0))
+            .map(option => (
+              <Options 
+                className={(countryFilter ? countryFilter.select ?? null : null) === option.value ? 'active' : ''}
+                key={option.id} 
+                onClick={() => {
+                  setCountryFilter({ ...countryFilter, select: option.value ?? '' });
+                  setOpenListOptions(false);
+                }}
+              >
+                {option.name}
+              </Options>
+            ))
+        }
       </ListOptions>
     </Container>
   );
