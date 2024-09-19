@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Colors from "../../../common/GlobalStyles/Colors";
+import { useRecoilState } from "recoil";
+import { countryFilterState } from "../../../common/states/atom";
 
 const FilterInputWrapper = styled.div`
   background-color: ${Colors.darkBlue};
@@ -54,9 +56,17 @@ const Label = styled.label`
 `;
 
 export default function FilterInput() {
+  const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
+
   return (
     <FilterInputWrapper>
-      <Input type="text" id="filter-country" required />
+      <Input 
+        type="text" 
+        id="filter-country" 
+        value={countryFilter?.input || ''} 
+        onChange={(e) => setCountryFilter({...countryFilter, input: e.target.value})} 
+        required 
+      />
       <Label className="labelline" htmlFor="filter-country">Search for a country...</Label>
     </FilterInputWrapper>
   );

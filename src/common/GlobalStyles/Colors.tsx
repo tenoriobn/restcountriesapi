@@ -8,6 +8,9 @@ const Colors = {
   white: '#ffffff',
   darkGrayHover: '#d1d1d1',
   veryDarkBlueActive: '#678098',
+
+  lightGrayHover: '#e6e6e611',
+  lightGrayActive: '#dddddd1f'
 };
 
 export default Colors;

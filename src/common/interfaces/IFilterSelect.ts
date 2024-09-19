@@ -1,6 +1,7 @@
 export interface IFilterSelect {
   id: number;
-  value?: string;
+  value?: string | null;
+  name?: string;
   // label?: string;
   // class?: string;
 }
