@@ -14,7 +14,7 @@ const HeaderContainer = styled.header`
   margin-bottom: 1.875rem;
 
   @media (max-width: 991px) {
-    padding: 0 1.25rem;
+    padding: 0 1.5rem;
   }
 
   @media (max-width: 374px) {
@@ -33,7 +33,7 @@ const ContentWrapper = styled.div`
   align-items: center;
   gap: 1rem;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     margin: 0 auto;
     width: 80%;
     max-width: 1280px;

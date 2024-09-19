@@ -2,17 +2,20 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
 const MainContainer = styled.main`
-  min-height: 100vh;
+  min-height: calc(100vh - 208px);
+  padding-bottom: 5rem;
 
-  @media (max-width: 991px) {
-    padding: 0 1.25rem;
+  @media (max-width: 767px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   @media (max-width: 374px) {
-    padding: 0 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     margin: 0 auto;
     width: 80%;
     max-width: 1280px;

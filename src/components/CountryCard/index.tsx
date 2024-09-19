@@ -10,14 +10,13 @@ import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
 const CardsContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  
 `;
 
 const CountryCardsContainer = styled.div`
   display: grid;
   justify-content: center;
   gap: 4.625rem;
-  margin: 3.125rem 0;
+  margin-top: 3.125rem;
 
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
