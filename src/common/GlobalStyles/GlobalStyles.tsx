@@ -1,6 +1,6 @@
-import styled, { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
 import Colors from "./Colors";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -20,7 +20,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 export default GlobalStyles;
 
-export const Button = styled(Link)`
+export const BaseButton = css`
   border: .125rem solid ${Colors.darkBlue};
   border-radius: .25rem;
 
@@ -47,4 +47,3 @@ export const Button = styled(Link)`
     background: ${Colors.veryDarkBlue};
   }
 `;
-

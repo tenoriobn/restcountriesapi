@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import Colors from "../common/GlobalStyles/Colors";
-import ArrowIcon from "../../public/icons/Arrow-left.svg?react";
-import { Button } from "../common/GlobalStyles/GlobalStyles";
+import ArrowIcon from "../../public/assets/icons/Arrow-left.svg?react";
+import { BaseButton } from "../common/GlobalStyles/GlobalStyles";
 import { useRecoilState } from "recoil";
 import { selectedCountryState } from "../common/states/atom";
 import { useCountryNamesFromCodes } from "../common/states/hook/useCountryNamesFromCodes";
+import { Link } from "react-router-dom";
 
-export const StylizedButton = styled(Button)`
+export const StylizedLink = styled(Link)`
+  ${BaseButton}
   font-size: 1.125rem;
   font-weight: 400;
 
@@ -91,7 +93,8 @@ const BorderCountries = styled.div`
     gap: .75rem;
     align-items: center;
 
-    ${Button} {
+    a {
+      ${BaseButton}
       font-size: 1rem;
       font-weight: 300;
       padding: .4375rem .375rem;
@@ -113,10 +116,10 @@ export default function CountryOverview() {
 
   return (
     <div>
-      <StylizedButton to="/">
+      <StylizedLink to="/">
         <ArrowIcon />
         Back
-      </StylizedButton>
+      </StylizedLink>
 
       <CountryFlag src={country?.flags.svg} alt={`Bandeira - ${country?.name.common}`} />
 
@@ -151,13 +154,13 @@ export default function CountryOverview() {
 
           <div>
             {borderCountriesData.slice(0, 3).map((borderCountry, index) => (
-              <Button 
+              <Link 
                 to="#" 
                 key={index} 
                 onClick={() => setSelectedCountry(borderCountry)}
               >
                 {borderCountry.name.common}
-              </Button>
+              </Link>
             ))}
           </div>
         </BorderCountries>
