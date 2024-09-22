@@ -10,7 +10,11 @@ const Colors = {
   veryDarkBlueActive: '#678098',
 
   lightGrayHover: '#e6e6e611',
-  lightGrayActive: '#dddddd1f'
+  lightGrayActive: '#dddddd1f',
+
+  skeletonBaseColor: '#2b3945',
+  skeletonBaseColorImg: '#232f3959',
+  skeletonHighlightColor: '#202c3760',
 };
 
 export default Colors;

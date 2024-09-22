@@ -1,5 +1,7 @@
+import { SkeletonTheme } from "react-loading-skeleton";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import Colors from "../../common/GlobalStyles/Colors";
 
 const MainContainer = styled.main`
   min-height: calc(100vh - 208px);
@@ -20,12 +22,24 @@ const MainContainer = styled.main`
     width: 80%;
     max-width: 1280px;
   }
+
+  @media (prefers-reduced-motion) {
+    .react-loading-skeleton {
+        --pseudo-element-display: block;
+    }
+  }
 `;
 
 export default function AppLayout() {
   return (
     <MainContainer>
-      <Outlet />
+      <SkeletonTheme
+        baseColor={Colors.skeletonBaseColor} 
+        highlightColor={Colors.skeletonHighlightColor}
+        duration={1.5}
+      >
+        <Outlet />
+      </SkeletonTheme>
     </MainContainer>
   );
 }

@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import CountryOverview from "./pages/CountryOverview";
 import AppLayout from "./components/AppLayout/AppLayout";
+import CountryOverview from "./pages/CountryOverview";
 
 function App() {
   const queryClient = new QueryClient();

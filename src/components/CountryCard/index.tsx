@@ -6,13 +6,15 @@ import { countryFilterState, selectedCountryState } from "../../common/states/at
 import { useFilteredCountries } from "../../common/states/hook/useFilteredCountries";
 import { useState } from "react";
 import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
+import 'react-loading-skeleton/dist/skeleton.css';
+import SkeletonCountryCard from "./SkeletonCountryCard";
 
 const CardsContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const CountryCardsContainer = styled.div`
+export const CountryCardsContainer = styled.div`
   display: grid;
   justify-content: center;
   gap: 4.625rem;
@@ -26,6 +28,7 @@ const CountryCardsContainer = styled.div`
     min-height: 338px;
     max-width: 328px;
     width: 100%;
+    transition: all .2s ease;
 
     article {
       display: inherit;
@@ -38,6 +41,10 @@ const CountryCardsContainer = styled.div`
         height: 198px;
         object-fit: cover;
       }
+    }
+
+    &:hover {
+      opacity: .7;
     }
   }
 
@@ -54,7 +61,7 @@ const CountryCardsContainer = styled.div`
   }
 `;
 
-const CountryDetails = styled.section`
+export const CountryDetails = styled.section`
   padding: 2.25rem 1.875rem 3.625rem 1.875rem;
 
   h2 {
@@ -103,7 +110,7 @@ const StylizedButton = styled.button`
   align-self: center;
   padding: .5625rem 1rem;
   max-width: 130px;
-  margin-bottom: 3.125rem;
+  margin-top: 3.125rem;
 `;
 
 export default function CountryCard() {
@@ -115,48 +122,52 @@ export default function CountryCard() {
   console.log('countryFilter: ', countryFilter);
   console.log('filteredCountries', filteredCountries.length);
 
+  // const isLoadingTeste = true;
   if (isLoading) {
-    return `Carregando...`;
+    return <SkeletonCountryCard />;
   }
 
   return (
     <CardsContainerWrapper>
       <CountryCardsContainer>
-        {filteredCountries.slice(0, sliceLimit).map((country) => (
-          
-          <Link 
-            to="/overview" 
-            key={country.name.common}
-            onClick={() => setSelectedCountry(country)}
-          >        
-            <article>
-              <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
-              
-              <CountryDetails>
-                <h2>{country.name.common}</h2>
-                <div>
-                  <p><span>Population: </span>{country.population.toLocaleString('en-US')}</p>
-                  <p><span>Region: </span>{country.region}</p>
-                  <p><span>Capital: </span>{country.capital.join(', ')}</p>
-                </div>
-              </CountryDetails>
-            </article>
-          </Link>
-        ))}
+        { filteredCountries.length > 0 ?
+          filteredCountries.slice(0, sliceLimit).map((country) => (
+            <Link 
+              to="/overview" 
+              key={country.name.common}
+              onClick={() => setSelectedCountry(country)}
+            >        
+              <article>
+                <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
+                
+                <CountryDetails>
+                  <h2>{country.name.common}</h2>
+                  <div>
+                    <p><span>Population: </span>{country.population.toLocaleString('en-US')}</p>
+                    <p><span>Region: </span>{country.region}</p>
+                    <p><span>Capital: </span>{country.capital.join(', ')}</p>
+                  </div>
+                </CountryDetails>
+              </article>
+            </Link>
+          ))
+          : <p>Country not found!</p>
+        }
       </CountryCardsContainer>
 
-      {
-        filteredCountries.length > 8
-          ?
+      {filteredCountries.length > 8 ? 
+        (
           <StylizedButton
-            onClick={() => filteredCountries.length > sliceLimit ? setSliceLimit(sliceLimit + 8) : setSliceLimit(8)}
+            onClick={() =>
+              filteredCountries.length > sliceLimit
+                ? setSliceLimit(sliceLimit + 8)
+                : setSliceLimit(8)
+            }
           >
             {filteredCountries.length > sliceLimit ? 'Load More' : 'Show Less'}
-
           </StylizedButton>
-          : ''
+        ) : ('')
       }
-      
     </CardsContainerWrapper>
   );
 }
