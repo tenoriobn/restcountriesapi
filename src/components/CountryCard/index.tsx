@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { countryFilterState, selectedCountryState } from "../../common/states/atom";
 import { useFilteredCountries } from "../../common/states/hook/useFilteredCountries";
-import { useState } from "react";
 import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
 import 'react-loading-skeleton/dist/skeleton.css';
 import SkeletonCountryCard from "./SkeletonCountryCard";
+import { useCardLimitByScreenSize } from "../../common/states/hook/useCardLimitByScreenSize";
 
 const CardsContainerWrapper = styled.div`
   display: flex;
@@ -35,6 +35,7 @@ export const CountryCardsContainer = styled.div`
       background-color: ${Colors.darkBlue};
       border-radius: .375rem;
       overflow: auto;
+      height: 100%;
 
       img {
         width: 100%;
@@ -59,9 +60,15 @@ export const CountryCardsContainer = styled.div`
       }
     }
   }
+
+  @media (min-width: 992px) {
+    a {
+      max-width: 264px;
+    }
+  }
 `;
 
-export const CountryDetails = styled.section`
+export const CountryCardDetails = styled.section`
   padding: 2.25rem 1.875rem 3.625rem 1.875rem;
 
   h2 {
@@ -117,10 +124,9 @@ export default function CountryCard() {
   const setSelectedCountry = useSetRecoilState(selectedCountryState);
   const countryFilter = useRecoilValue(countryFilterState);
   const { filteredCountries, isLoading } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
-  const [sliceLimit, setSliceLimit] = useState<number>(8);
+  const {limit, setLimit} = useCardLimitByScreenSize();
 
   console.log('countryFilter: ', countryFilter);
-  console.log('filteredCountries', filteredCountries.length);
 
   // const isLoadingTeste = true;
   if (isLoading) {
@@ -131,23 +137,23 @@ export default function CountryCard() {
     <CardsContainerWrapper>
       <CountryCardsContainer>
         { filteredCountries.length > 0 ?
-          filteredCountries.slice(0, sliceLimit).map((country) => (
+          filteredCountries.slice(0, limit.sliceLimit).map((country) => (
             <Link 
               to="/overview" 
               key={country.name.common}
               onClick={() => setSelectedCountry(country)}
             >        
               <article>
-                <img src={country.flags.svg} alt={`Bandeira - ${country.name.common}`} />
+                <img src={country.flags.png} alt={`Bandeira - ${country.name.common}`} />
                 
-                <CountryDetails>
+                <CountryCardDetails>
                   <h2>{country.name.common}</h2>
                   <div>
                     <p><span>Population: </span>{country.population.toLocaleString('en-US')}</p>
                     <p><span>Region: </span>{country.region}</p>
                     <p><span>Capital: </span>{country.capital.join(', ')}</p>
                   </div>
-                </CountryDetails>
+                </CountryCardDetails>
               </article>
             </Link>
           ))
@@ -155,16 +161,16 @@ export default function CountryCard() {
         }
       </CountryCardsContainer>
 
-      {filteredCountries.length > 8 ? 
+      {filteredCountries.length > limit.cardsLimit ? 
         (
           <StylizedButton
             onClick={() =>
-              filteredCountries.length > sliceLimit
-                ? setSliceLimit(sliceLimit + 8)
-                : setSliceLimit(8)
+              filteredCountries.length > limit.sliceLimit
+                ? setLimit({...limit, sliceLimit: limit.sliceLimit + limit.cardsLimit})
+                : setLimit({...limit, sliceLimit: limit.cardsLimit})
             }
           >
-            {filteredCountries.length > sliceLimit ? 'Load More' : 'Show Less'}
+            {filteredCountries.length > limit.sliceLimit ? 'Load More' : 'Show Less'}
           </StylizedButton>
         ) : ('')
       }

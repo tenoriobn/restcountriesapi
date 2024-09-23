@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Colors from "../../common/GlobalStyles/Colors";
 import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
 import SkeletonCountryDetailsContainer from "./SkeletonCountryDetailsContainer";
+import useSessionStorage from "../../common/states/hook/useSessionStorage";
 
 export const CountryDetailsWrapper = styled.div`
   display: grid;
@@ -136,6 +137,8 @@ export default function CountryDetailsContainer() {
   const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
   const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
   const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
+
+  useSessionStorage();
 
   // const isLoadingTeste = true;
   if (isLoading) {

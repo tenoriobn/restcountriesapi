@@ -40,7 +40,7 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const Title = styled.h2`
+const Title = styled.h1`
   color: ${Colors.white};
   font-size: 1.0625rem;
   font-weight: 800;
