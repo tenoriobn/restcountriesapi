@@ -10,13 +10,13 @@ import useSessionStorage from "../../common/states/hook/useSessionStorage";
 
 export const CountryDetailsWrapper = styled.div`
   display: grid;
+  justify-content: center;
   gap: 3.875rem;
 
   .country-flag {
     object-fit: cover;
     width: 100%;
     max-width: 560px;
-    /* max-height: 401px; */
     height: 401px;
   }
 
@@ -25,7 +25,7 @@ export const CountryDetailsWrapper = styled.div`
     width: 100%;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1440px) {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -90,32 +90,27 @@ export const CountryInfo = styled.div`
 `;
 
 export const BorderCountriesContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1.75rem;
   margin-top: 3.5rem;
   
   .border-countries__subtitle {
     font-size: 1.25rem;
     font-weight: 600;
+    width: 100%;
   }
 
-  .border-countries__list {
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(3, 1fr);
-    flex-wrap: wrap;
-    gap: .75rem;
-
-    .border-countries__list_link {
-      ${BaseButton}
-      font-size: 1rem;
-      font-weight: 300;
-      padding: .4375rem .375rem;
-    }
+  .border-countries__list_link {
+    ${BaseButton}
+    font-size: 1rem;
+    font-weight: 300;
+    padding: .4375rem .375rem;
+    width: max-content;
+    min-width: 90px;
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: auto 1fr;
     align-items: center;
     gap: 1rem;
     margin: 4.75rem 0 0 0;
@@ -123,12 +118,12 @@ export const BorderCountriesContainer = styled.div`
     .border-countries__subtitle {
       font-size: 1rem;
       margin-bottom: 0rem;
+      max-width: 128px;
+      width: 100%;
     }
 
-    .border-countries__list {
-      .border-countries__list_link {
-        padding: .375rem;
-      }
+    .border-countries__list_link {
+      padding: .375rem;
     }
   }
 `;
@@ -197,19 +192,17 @@ export default function CountryDetailsContainer() {
         {borderCountriesData.length > 0 && (
           <BorderCountriesContainer>
             <h3 className="border-countries__subtitle">Border Countries:</h3>
-
-            <div className="border-countries__list">
-              {borderCountriesData.slice(0, 3).map((borderCountry, index) => (
-                <Link
-                  className="border-countries__list_link"
-                  to="#"
-                  key={index}
-                  onClick={() => setSelectedCountry(borderCountry)}
-                >
-                  {borderCountry.name.common}
-                </Link>
-              ))}
-            </div>
+            
+            {borderCountriesData.map((borderCountry, index) => (
+              <Link
+                className="border-countries__list_link"
+                to="#"
+                key={index}
+                onClick={() => setSelectedCountry(borderCountry)}
+              >
+                {borderCountry.name.common}
+              </Link>
+            ))}
           </BorderCountriesContainer>
         )}
       </div>

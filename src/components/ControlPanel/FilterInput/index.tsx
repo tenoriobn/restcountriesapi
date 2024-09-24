@@ -27,6 +27,7 @@ const Input = styled.input`
   font-weight: 500;
   width: 100%;
   padding: 1.0625rem 2rem;
+  min-height: 56px;
   z-index: 5;
 
   &:focus, &:valid {

@@ -1,6 +1,5 @@
 import { createGlobalStyle, css } from "styled-components";
 import Colors from "./Colors";
-// import { Link } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -35,7 +34,10 @@ export const BaseButton = css`
   cursor: pointer;
   color: white;
   text-decoration: none;
+  text-align: center;
   width: 100%;
+
+  transition: all .2s ease-in-out;
 
   &:hover {
     border-color: #2c3741;

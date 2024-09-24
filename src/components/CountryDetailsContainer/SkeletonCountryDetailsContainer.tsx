@@ -32,19 +32,17 @@ export default function SkeletonCountryDetailsContainer() {
         </CountryDetails>
 
         <BorderCountriesContainer>
-          <h3 className="border-countries__subtitle"><Skeleton width={156} height={20} /></h3>
-
-          <div className="border-countries__list">
-            {Array(3).fill(null).map((_, index) => (
-              <Link
-                className="border-countries__list_link"
-                to="#"
-                key={index}
-              >
-                <Skeleton />
-              </Link>
-            ))}
-          </div>
+          <h3 className="border-countries__subtitle"><Skeleton /></h3>
+          
+          {Array(3).fill(null).map((_, index) => (
+            <Link
+              className="border-countries__list_link"
+              to="#"
+              key={index}
+            >
+              <Skeleton  />
+            </Link>
+          ))}
         </BorderCountriesContainer>
       </div>
     </CountryDetailsWrapper>
