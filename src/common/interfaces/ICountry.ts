@@ -37,4 +37,5 @@ export interface ICountry {
   currencies: ICurrencies;
   languages: string[];
   borders: string[];
+  error: boolean;
 }

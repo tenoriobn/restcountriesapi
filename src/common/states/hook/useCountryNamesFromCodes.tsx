@@ -5,11 +5,11 @@ import { ICountry } from '../../interfaces/ICountry';
 export function useCountryNamesFromCodes(country: ICountry) {
   const bordersCountries = country?.borders?.join(',') || '';
 
-  const { data: borderCountriesData = [], isLoading } = useQuery({
+  const { data: borderCountriesData = [], isLoading, isError } = useQuery({
     queryKey: ['borders-countries-data', bordersCountries],
     queryFn: getApi(`alpha?codes=${bordersCountries}?fields=flags,name,population,region,subregion,capital,tld,currencies,languages,borders`),
     enabled: bordersCountries.length > 0,
   });
 
-  return { borderCountriesData, isLoading };
+  return { borderCountriesData, isLoading, isError };
 }

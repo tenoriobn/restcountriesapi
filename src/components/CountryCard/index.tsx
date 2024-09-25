@@ -8,27 +8,26 @@ import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
 import 'react-loading-skeleton/dist/skeleton.css';
 import SkeletonCountryCard from "./SkeletonCountryCard";
 import { useCardLimitByScreenSize } from "../../common/states/hook/useCardLimitByScreenSize";
+import MessageError from "../MessageError";
 
-const CardsContainerWrapper = styled.div`
+export const CardsContainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
 export const CountryCardsContainer = styled.div`
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(284px, 1fr));
+
   justify-content: center;
   gap: 4.625rem;
-  margin-top: 3.125rem;
-
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
   a {
     text-decoration: none;
     justify-self: center;
-    min-height: 338px;
+    transition: all .2s ease;
     max-width: 328px;
     width: 100%;
-    transition: all .2s ease;
 
     article {
       display: inherit;
@@ -50,9 +49,9 @@ export const CountryCardsContainer = styled.div`
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-
     a {
+      flex: 1 1 240px;
+      
       article {
         img {
           height: 160px;
@@ -62,8 +61,15 @@ export const CountryCardsContainer = styled.div`
   }
 
   @media (min-width: 992px) {
-    a {
-      max-width: 264px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    justify-content: start;
+
+    a {      
+      article {
+        img {
+          height: 160px;
+        }
+      }
     }
   }
 `;
@@ -123,7 +129,7 @@ const StylizedButton = styled.button`
 export default function CountryCard() {
   const setSelectedCountry = useSetRecoilState(selectedCountryState);
   const countryFilter = useRecoilValue(countryFilterState);
-  const { filteredCountries, isLoading } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
+  const { filteredCountries, isLoading, isError } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
   const {limit, setLimit} = useCardLimitByScreenSize();
 
   console.log('countryFilter: ', countryFilter);
@@ -131,6 +137,14 @@ export default function CountryCard() {
   // const isLoadingTeste = true;
   if (isLoading) {
     return <SkeletonCountryCard />;
+  }
+
+  if (isError) {
+    return (
+      <MessageError>
+        We are currently experiencing technical difficulties. Please try again later.
+      </MessageError>
+    );
   }
 
   return (

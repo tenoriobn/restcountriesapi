@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import { useCountryNamesFromCodes } from "../../common/states/hook/useCountryNamesFromCodes";
-import { useRecoilState } from "recoil";
-import { selectedCountryState } from "../../common/states/atom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { errorStatusState, selectedCountryState } from "../../common/states/atom";
 import { Link } from "react-router-dom";
 import Colors from "../../common/GlobalStyles/Colors";
 import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
 import SkeletonCountryDetailsContainer from "./SkeletonCountryDetailsContainer";
 import useSessionStorage from "../../common/states/hook/useSessionStorage";
+import MessageError from "../MessageError";
 
 export const CountryDetailsWrapper = styled.div`
   display: grid;
@@ -132,6 +133,10 @@ export default function CountryDetailsContainer() {
   const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
   const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
   const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
+  const errorStatus = useRecoilValue(errorStatusState);
+
+  console.log('country', country);
+  console.log('borderCountriesData', borderCountriesData);
 
   useSessionStorage();
 
@@ -140,12 +145,21 @@ export default function CountryDetailsContainer() {
     return <SkeletonCountryDetailsContainer />;
   }
 
+  if (errorStatus) {
+    return (
+      <MessageError>
+        We are currently experiencing technical difficulties. Please try again later.
+      </MessageError>
+    );
+  }
+
   return (
     <CountryDetailsWrapper>
       <img
         className="country-flag"
         src={country?.flags.svg}
         alt={`Bandeira - ${country?.name.common}`}
+        loading="lazy"
       />
 
       <div className="country-content">

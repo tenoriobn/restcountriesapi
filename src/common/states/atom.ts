@@ -16,3 +16,8 @@ export const countryFilterState = atom<ICountryFilter | null>({
   key: 'countryFilterState',
   default: null,
 });
+
+export const errorStatusState = atom<boolean>({
+  key: 'errorStatusState',
+  default: false,
+});

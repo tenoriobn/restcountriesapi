@@ -8,10 +8,8 @@
   - INVESTIGAR BORDA EM ALGUNS CARDS ESPECIFICOS; ***
   - Controlar botão Ver Mais, pois em telas responsivas, é 3 cards por linha, então deve exibir 9 em vez de 8. ***
   - Persistir dados; ***
-
-  
-  - AJUSTAR RESPONSIVIDADE PARA QUE TEXTOS DOS CARDS NÃO FIQUEM DESPROPORCIONAIS (ADICIONAR ... Reticências);
-
+  - Ao pesquisar um país remover espaçamento enorme entre os cards***
+  - AJUSTAR RESPONSIVIDADE PARA QUE TEXTOS DOS CARDS NÃO FIQUEM DESPROPORCIONAIS (ADICIONAR ... Reticências);***
 }
 
 * `CountryOverview.tsx`{
@@ -20,15 +18,10 @@
  - Ao clicar no botão do Border Countries, renderizar informações do país cujo o botão foi clicado ***
  - Adicionar todos os `Border Countries:` ***
  - Verficiar processo para lidar com botões cujo o texto é muito grande para não quebrar layout ***
-
-
-
-
- - Lidar com erros quando não trazer alguma informação necessária, (ex: ops, tivemos um problema tente novamente em alguns minutos...).
+ - Lidar com erros quando não trazer alguma informação necessária, (ex: ops, tivemos um problema tente novamente em alguns minutos...) ***
 }
 
 * Implementar tema Dark/Light (ARMAZENAR COR ESCOLHIDA NO LOCALSTORAGE)
 * Aplicar efeito de transição com Framer Motion
 * Se possível ao clicar na imagem dentro do Overview abrir um modal com a imagem em tamanho grande.
 
-* Ao pesquisar um país remover espaçamento enorme entre os cards
