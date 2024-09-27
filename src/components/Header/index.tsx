@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import Moon from './assets/Moon.svg?react';
-import Colors from '../../common/GlobalStyles/Colors';
 import { useRecoilState } from 'recoil';
-import { darkModeState } from '../../common/states/atom';
+import { darkModeState } from 'src/common/states/atom';
+import { transitions } from 'src/common/Themes/transitions';
 
 const HeaderContainer = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: ${Colors.darkBlue};
-  box-shadow: 0rem -0.25rem 1.125rem -0.25rem ${Colors.charcoalBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
+  box-shadow: 0rem -0.25rem 1.125rem -0.25rem ${({ theme }) => theme.primaryShadowColor};
   height: 100px;
   margin-bottom: 1.875rem;
 
@@ -41,7 +41,7 @@ const ContentWrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  color: ${Colors.white};
+  color: ${({ theme }) => theme.primaryText};
   font-size: 1.0625rem;
   font-weight: 800;
 
@@ -56,25 +56,25 @@ const DarkModeLabel = styled.label`
   gap: .75rem;
 
   cursor: pointer;
-  color: ${Colors.white};
+  color: ${({ theme }) => theme.primaryText};
   font-size: .875rem;
   font-weight: 500;
 
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
 
   &:hover {
-    color: ${Colors.darkGrayHover};
+    color: ${({ theme }) => theme.primaryHover};
 
     path {
-      fill: ${Colors.darkGrayHover};
+      fill: ${({ theme }) => theme.primaryHover};
     }
   }
 
   &:active {
-    color: ${Colors.veryDarkBlueActive};
+    color: ${({ theme }) => theme.primaryActive};
 
     path {
-      fill: ${Colors.veryDarkBlueActive};
+      fill: ${({ theme }) => theme.primaryActive};
     }
   }
 
@@ -88,8 +88,8 @@ const MoonIcon = styled(Moon)`
   height: 14px;
 
   path {
-    transition: all .3s ease-in-out;
-    fill: ${Colors.white};
+    transition: ${transitions.smoothTransition};
+    fill: ${({ theme }) => theme.primaryText};
   }
 
   @media (min-width: 768px) {
@@ -100,7 +100,6 @@ const MoonIcon = styled(Moon)`
 
 export default function Header() {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
-  console.log('DarkMode: ', darkMode);
 
   return (
     <HeaderContainer>

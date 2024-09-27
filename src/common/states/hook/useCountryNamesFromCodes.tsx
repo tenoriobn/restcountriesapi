@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getApi } from '../../../utils/http';
+import { getApi } from 'src/utils/http';
 import { ICountry } from '../../interfaces/ICountry';
 
 export function useCountryNamesFromCodes(country: ICountry) {

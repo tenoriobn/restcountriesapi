@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Colors from "../../../common/GlobalStyles/Colors";
 import { useRecoilState } from "recoil";
-import { countryFilterState } from "../../../common/states/atom";
+import { countryFilterState } from "src/common/states/atom";
+import { transitions } from "src/common/Themes/transitions";
 
 const FilterInputWrapper = styled.div`
-  background-color: ${Colors.darkBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
   line-height: 3.625rem;
   position: relative;
@@ -22,7 +22,7 @@ const Input = styled.input`
   border-radius: .375rem;
   box-sizing: border-box;
   box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
-  color: ${Colors.white};
+  color: ${({ theme }) => theme.primaryText};
   font-size: 1rem;
   font-weight: 500;
   width: 100%;
@@ -31,20 +31,20 @@ const Input = styled.input`
   z-index: 5;
 
   &:focus, &:valid {
-    border: .125rem solid ${Colors.darkGrayHover};
-    background-color: #202c37;
-    box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
+    border: .125rem solid ${({ theme }) => theme.primaryHover};
+    background-color: ${({ theme }) => theme.primaryBg};
+    box-shadow: 0rem .25rem .75rem -0.1875rem ${({ theme }) => theme.primaryShadowColor};
   }
   
   &:focus + .labelline, &:valid + .labelline {
-    background: ${Colors.veryDarkBlue};
-    color: ${Colors.white};
+    background: ${({ theme }) => theme.primaryBg};
+    color: ${({ theme }) => theme.primaryText};
     height: 30px;
     line-height: 1.875rem;
     transform: translate(16px, -18px) scale(0.88);
     z-index: 6;
     padding: 0 .5rem;
-    transition: all .2s ease-in-out;
+    transition: ${transitions.smoothTransition};
   }
 `;
 
@@ -53,7 +53,8 @@ const Label = styled.label`
   padding: 0 2rem;
   font-size: 1rem;
   font-weight: 500;
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
+  color: ${({ theme }) => theme.placeholderColor};
 `;
 
 export default function FilterInput() {

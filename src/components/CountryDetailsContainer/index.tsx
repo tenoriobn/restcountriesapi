@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { useCountryNamesFromCodes } from "../../common/states/hook/useCountryNamesFromCodes";
+import { useCountryNamesFromCodes } from "src/common/states/hook/useCountryNamesFromCodes";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { errorStatusState, selectedCountryState } from "../../common/states/atom";
+import { errorStatusState, selectedCountryState } from "src/common/states/atom";
 import { Link } from "react-router-dom";
-import Colors from "../../common/GlobalStyles/Colors";
-import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
+import { BaseButton } from "src/common/GlobalStyles/GlobalStyles";
 import SkeletonCountryDetailsContainer from "./SkeletonCountryDetailsContainer";
-import useSessionStorage from "../../common/states/hook/useSessionStorage";
+import useSessionStorage from "src/common/states/hook/useSessionStorage";
 import MessageError from "../MessageError";
 
 export const CountryDetailsWrapper = styled.div`
@@ -45,7 +44,7 @@ export const CountryDetailsWrapper = styled.div`
 
 export const CountryDetails = styled.div`
   .country-title {
-    color: ${Colors.white};
+    color: ${({ theme }) => theme.primaryText};
     font-size: 1.75rem;
     font-weight: 800;
     margin-bottom: 2.25rem;
@@ -76,7 +75,7 @@ export const CountryInfo = styled.div`
   p {
     font-size: 1.125rem;
     font-weight: 400;
-    color: white;
+    color: ${({ theme }) => theme.primaryText};
 
     span {
       font-weight: 700;

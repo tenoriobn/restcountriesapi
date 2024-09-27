@@ -21,7 +21,13 @@
  - Lidar com erros quando não trazer alguma informação necessária, (ex: ops, tivemos um problema tente novamente em alguns minutos...) ***
 }
 
-* Implementar tema Dark/Light (ARMAZENAR COR ESCOLHIDA NO LOCALSTORAGE)
+* Implementar tema Dark/Light (ARMAZENAR COR ESCOLHIDA NO LOCALSTORAGE) ///
+
+
 * Aplicar efeito de transição com Framer Motion
 * Se possível ao clicar na imagem dentro do Overview abrir um modal com a imagem em tamanho grande.
-
+* Caminhos dinâmicos na importação
+* Performance (memo, outras ferramentas)
+* Test Cypress ou Unitário
+* Colocar lupa de pesquisa no search
+* Boxshadow nos cards

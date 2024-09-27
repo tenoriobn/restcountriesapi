@@ -1,7 +1,6 @@
 import { SkeletonTheme } from "react-loading-skeleton";
 import { Outlet } from "react-router-dom";
-import styled from "styled-components";
-import Colors from "../../common/GlobalStyles/Colors";
+import styled, { useTheme } from "styled-components";
 
 const MainContainer = styled.main`
   min-height: calc(100vh - 208px);
@@ -31,11 +30,13 @@ const MainContainer = styled.main`
 `;
 
 export default function AppLayout() {
+  const theme = useTheme();
+
   return (
     <MainContainer>
       <SkeletonTheme
-        baseColor={Colors.skeletonBaseColor} 
-        highlightColor={Colors.skeletonHighlightColor}
+        baseColor={theme.secondaryBg} 
+        highlightColor={theme.skeletonHighlightColor}
         duration={1.5}
       >
         <Outlet />

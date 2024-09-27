@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Colors from "../../../common/GlobalStyles/Colors";
-import { IFilterSelect } from "../../../common/interfaces/IFilterSelect";
-import Arrow from "./assets/select-arrow.svg?react";
-import { useEffect, useState } from "react";
-import { countryFilterState } from "../../../common/states/atom";
 import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import Arrow from "./assets/select-arrow.svg?react";
+import { IFilterSelect } from "src/common/interfaces/IFilterSelect";
+import { countryFilterState } from "src/common/states/atom";
+import { transitions } from "src/common/Themes/transitions";
 
 const Container = styled.div`
   position: relative;
@@ -27,7 +27,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${Colors.darkBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
   box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
   box-sizing: border-box;
@@ -41,7 +41,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
       border: .125rem solid #d1d1d1;
-      background-color: #202c37;
+      background-color: ${props.theme.primaryBg};
       box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
     ` : '' }
 `;
@@ -52,11 +52,12 @@ const Label = styled.label<{ $optionSelect: string | null; $openListOptions: boo
   font-size: 1rem;
   font-weight: 500;
   line-height: normal;
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
+  color: ${({ theme }) => theme.placeholderColor};
   
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
-      background: #202c37;
+      background: ${props.theme.primaryBg};
       padding: 0 .5rem;
       transform: translate(-16px, -30px) scale(0.88);
       z-index: 6;
@@ -68,7 +69,7 @@ const ListOptions = styled.ul<{ open: boolean }>`
   flex-direction: column;
 
   box-sizing: border-box;
-  background-color: ${Colors.darkBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
   box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
 
@@ -86,21 +87,24 @@ const ListOptions = styled.ul<{ open: boolean }>`
 const Options = styled.li`
   cursor: pointer;
   padding: .5rem 1.5rem;
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
 
   &.active {
-    background-color: ${Colors.lightGrayActive}!important;
+    background-color: ${({ theme }) => theme.secondaryActive}!important;
   }
   
   &:hover {
-    background-color: ${Colors.lightGrayHover};
+    background-color: ${({ theme }) => theme.secondaryHover};
   }
 `;
 
 const SelectArrowIcon = styled(Arrow)<{ $openListOptions: boolean }>`
   transform:  ${props => props.$openListOptions ? 'rotate(180deg)' : ''};
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
   width: 10px;
+  path {
+    stroke: ${({ theme }) => theme.primaryText};
+  }
 `;
 
 const options:IFilterSelect[] = [

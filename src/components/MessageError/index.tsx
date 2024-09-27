@@ -1,4 +1,4 @@
-import { IMessageError } from "../../common/interfaces/IError";
+import { IMessageError } from "src/common/interfaces/IError";
 
 export default function MessageError({ children}: IMessageError) {
   return (

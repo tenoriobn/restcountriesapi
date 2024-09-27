@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import Colors from "../common/GlobalStyles/Colors";
 import ArrowIcon from "../../public/assets/icons/Arrow-left.svg?react";
-import { BaseButton } from "../common/GlobalStyles/GlobalStyles";
+import { BaseButton } from "src/common/GlobalStyles/GlobalStyles";
 import { Link } from "react-router-dom";
-import CountryDetailsContainer from "../components/CountryDetailsContainer";
+import CountryDetailsContainer from "src/components/CountryDetailsContainer";
+import { transitions } from "src/common/Themes/transitions";
 
 export const StylizedLink = styled(Link)`
   ${BaseButton}
@@ -15,11 +15,11 @@ export const StylizedLink = styled(Link)`
 
   gap: .875rem;
 
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
   margin-bottom: 5rem;
 
   svg path {
-    stroke: ${Colors.white};
+    stroke: ${({ theme }) => theme.primaryText};
     font-weight: 800;
   }
 `;

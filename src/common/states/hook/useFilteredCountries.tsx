@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { ICountry } from '../../interfaces/ICountry';
-import { getApi } from '../../../utils/http';
+import { getApi } from 'src/utils/http';
 
 const desiredCountries = [
   'Germany', 'United States', 'Brazil', 'Iceland', 'Afghanistan',

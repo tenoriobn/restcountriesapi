@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import Colors from "../../common/GlobalStyles/Colors";
 import { Link } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { countryFilterState, selectedCountryState } from "../../common/states/atom";
-import { useFilteredCountries } from "../../common/states/hook/useFilteredCountries";
-import { BaseButton } from "../../common/GlobalStyles/GlobalStyles";
+import { countryFilterState, selectedCountryState } from "src/common/states/atom";
+import { useFilteredCountries } from "src/common/states/hook/useFilteredCountries";
+import { BaseButton } from "src/common/GlobalStyles/GlobalStyles";
 import 'react-loading-skeleton/dist/skeleton.css';
 import SkeletonCountryCard from "./SkeletonCountryCard";
-import { useCardLimitByScreenSize } from "../../common/states/hook/useCardLimitByScreenSize";
+import { useCardLimitByScreenSize } from "src/common/states/hook/useCardLimitByScreenSize";
 import MessageError from "../MessageError";
+import { transitions } from "src/common/Themes/transitions";
 
 export const CardsContainerWrapper = styled.div`
   display: flex;
@@ -25,13 +25,13 @@ export const CountryCardsContainer = styled.div`
   a {
     text-decoration: none;
     justify-self: center;
-    transition: all .2s ease;
+    transition: ${transitions.smoothTransition};
     max-width: 328px;
     width: 100%;
 
     article {
       display: inherit;
-      background-color: ${Colors.darkBlue};
+      background-color: ${({ theme }) => theme.secondaryBg};
       border-radius: .375rem;
       overflow: auto;
       height: 100%;
@@ -78,7 +78,7 @@ export const CountryCardDetails = styled.section`
   padding: 2.25rem 1.875rem 3.625rem 1.875rem;
 
   h2 {
-    color: ${Colors.white};
+    color: ${({ theme }) => theme.primaryText};
     font-size: 1.375rem;
     font-weight: 800;
     margin-bottom: 2rem;
@@ -92,7 +92,7 @@ export const CountryCardDetails = styled.section`
     p {
       font-size: 1.125rem;
       font-weight: 400;
-      color: white;
+      color: ${({ theme }) => theme.primaryText};
     }
     
     p span {
