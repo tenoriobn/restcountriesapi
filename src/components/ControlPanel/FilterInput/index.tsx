@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions";
+import Search from "./assets/Search.svg?react";
 
 const FilterInputWrapper = styled.div`
   background-color: ${({ theme }) => theme.secondaryBg};
@@ -21,7 +22,7 @@ const Input = styled.input`
   background-color: transparent;
   border-radius: .375rem;
   box-sizing: border-box;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
   color: ${({ theme }) => theme.primaryText};
   font-size: 1rem;
   font-weight: 500;
@@ -49,12 +50,25 @@ const Input = styled.input`
 `;
 
 const Label = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
   position: absolute;
-  padding: 0 2rem;
+  color: ${({ theme }) => theme.placeholderColor};
   font-size: 1rem;
   font-weight: 500;
+  padding: 0 2rem;
   transition: ${transitions.smoothTransition};
-  color: ${({ theme }) => theme.placeholderColor};
+
+  svg {
+    width: 20px;
+
+    path {
+      stroke: ${({ theme }) => theme.placeholderColor};
+      stroke-width: 2.5;
+    }
+  }
 `;
 
 export default function FilterInput() {
@@ -69,7 +83,10 @@ export default function FilterInput() {
         onChange={(e) => setCountryFilter({...countryFilter, input: e.target.value})} 
         required 
       />
-      <Label className="labelline" htmlFor="filter-country">Search for a country...</Label>
+      <Label className="labelline" htmlFor="filter-country">
+        <Search />
+        Search for a country...
+      </Label>
     </FilterInputWrapper>
   );
 }

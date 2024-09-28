@@ -29,6 +29,7 @@ export const CountryCardsContainer = styled.div`
     transition: ${transitions.smoothTransition};
     max-width: 328px;
     width: 100%;
+    box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
 
     article {
       display: inherit;

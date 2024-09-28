@@ -29,7 +29,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
 
   background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
   box-sizing: border-box;
   line-height: 3.625rem;
 
@@ -42,7 +42,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
     `
       border: .125rem solid #d1d1d1;
       background-color: ${props.theme.primaryBg};
-      box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
+      box-shadow: 0rem .25rem .75rem -0.1875rem ${props.theme.primaryShadowColor};
     ` : '' }
 `;
 
@@ -71,7 +71,7 @@ const ListOptions = styled.ul<{ open: boolean }>`
   box-sizing: border-box;
   background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
 
   padding:  ${props => props.open ? '1rem 0rem' : '0rem'};
   height:  ${props => props.open ? 'max-content' : '0px'};

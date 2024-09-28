@@ -154,12 +154,14 @@ export default function CountryDetailsContainer() {
 
   return (
     <CountryDetailsWrapper {...animation}>
-      <img
-        className="country-flag"
-        src={country?.flags.svg}
-        alt={`Bandeira - ${country?.name.common}`}
-        loading="lazy"
-      />
+      <a href={country?.flags.svg} target="_blank" rel="noopener noreferrer">      
+        <img
+          className="country-flag"
+          src={country?.flags.svg}
+          alt={`Bandeira - ${country?.name.common}`}
+          loading="lazy"
+        />
+      </a>
 
       <div className="country-content">
         <CountryDetails>
