@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { countryFilterState, selectedCountryState } from "src/common/states/atom";
 import { useFilteredCountries } from "src/common/states/hook/useFilteredCountries";
@@ -8,7 +9,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import SkeletonCountryCard from "./SkeletonCountryCard";
 import { useCardLimitByScreenSize } from "src/common/states/hook/useCardLimitByScreenSize";
 import MessageError from "../MessageError";
-import { transitions } from "src/common/Themes/transitions";
+import { animatedTransition, transitions } from "src/common/Themes/transitions";
 
 export const CardsContainerWrapper = styled.div`
   display: flex;
@@ -131,10 +132,8 @@ export default function CountryCard() {
   const countryFilter = useRecoilValue(countryFilterState);
   const { filteredCountries, isLoading, isError } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
   const {limit, setLimit} = useCardLimitByScreenSize();
+  const animation = animatedTransition();
 
-  console.log('countryFilter: ', countryFilter);
-
-  // const isLoadingTeste = true;
   if (isLoading) {
     return <SkeletonCountryCard />;
   }
@@ -157,7 +156,7 @@ export default function CountryCard() {
               key={country.name.common}
               onClick={() => setSelectedCountry(country)}
             >        
-              <article>
+              <motion.article {...animation}>
                 <img src={country.flags.png} alt={`Bandeira - ${country.name.common}`} />
                 
                 <CountryCardDetails>
@@ -168,7 +167,7 @@ export default function CountryCard() {
                     <p><span>Capital: </span>{country.capital.join(', ')}</p>
                   </div>
                 </CountryCardDetails>
-              </article>
+              </motion.article>
             </Link>
           ))
           : <p>Country not found!</p>

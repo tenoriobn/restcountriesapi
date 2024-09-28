@@ -81,7 +81,6 @@ const ListOptions = styled.ul<{ open: boolean }>`
   overflow: hidden;
   top: 60px;
   z-index: 999;
-  /* transition: all .2s ease-in; */
 `;
 
 const Options = styled.li`

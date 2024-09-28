@@ -25,6 +25,7 @@ export const StylizedLink = styled(Link)`
 `;
 
 export default function CountryOverview() {
+
   return (
     <div>
       <StylizedLink to="/">

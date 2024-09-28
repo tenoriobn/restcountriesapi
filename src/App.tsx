@@ -1,5 +1,6 @@
 import { RecoilRoot } from "recoil";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AnimatePresence } from "framer-motion";
 import DefaultPage from "./components/DefaultPage";
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
-        <DefaultPage />
+        <AnimatePresence mode="wait">
+          <DefaultPage />
+        </AnimatePresence>
       </QueryClientProvider>
     </RecoilRoot>
   );

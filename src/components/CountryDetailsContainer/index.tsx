@@ -7,8 +7,10 @@ import { BaseButton } from "src/common/GlobalStyles/GlobalStyles";
 import SkeletonCountryDetailsContainer from "./SkeletonCountryDetailsContainer";
 import useSessionStorage from "src/common/states/hook/useSessionStorage";
 import MessageError from "../MessageError";
+import { motion } from "framer-motion";
+import { animatedTransition } from "src/common/Themes/transitions";
 
-export const CountryDetailsWrapper = styled.div`
+export const CountryDetailsWrapper = styled(motion.div)`
   display: grid;
   justify-content: center;
   gap: 3.875rem;
@@ -130,16 +132,14 @@ export const BorderCountriesContainer = styled.div`
 
 export default function CountryDetailsContainer() {
   const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
-  const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
-  const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
   const errorStatus = useRecoilValue(errorStatusState);
 
-  console.log('country', country);
-  console.log('borderCountriesData', borderCountriesData);
+  const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
+  const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
 
+  const animation = animatedTransition();
   useSessionStorage();
 
-  // const isLoadingTeste = true;
   if (isLoading) {
     return <SkeletonCountryDetailsContainer />;
   }
@@ -153,7 +153,7 @@ export default function CountryDetailsContainer() {
   }
 
   return (
-    <CountryDetailsWrapper>
+    <CountryDetailsWrapper {...animation}>
       <img
         className="country-flag"
         src={country?.flags.svg}

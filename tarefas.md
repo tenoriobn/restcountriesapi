@@ -20,13 +20,14 @@
  - Verficiar processo para lidar com botões cujo o texto é muito grande para não quebrar layout ***
  - Lidar com erros quando não trazer alguma informação necessária, (ex: ops, tivemos um problema tente novamente em alguns minutos...) ***
 }
+* Caminhos absolutos na importação***
 
 * Implementar tema Dark/Light (ARMAZENAR COR ESCOLHIDA NO LOCALSTORAGE) ///
+  - Reajustar estilos (principal light), guardar o status do tema
 
 
 * Aplicar efeito de transição com Framer Motion
 * Se possível ao clicar na imagem dentro do Overview abrir um modal com a imagem em tamanho grande.
-* Caminhos dinâmicos na importação
 * Performance (memo, outras ferramentas)
 * Test Cypress ou Unitário
 * Colocar lupa de pesquisa no search
