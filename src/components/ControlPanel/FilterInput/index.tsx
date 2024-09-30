@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions";
-import Search from "./assets/Search.svg?react";
+import Search from "src/assets/icons/Search.svg?react";
 
 const FilterInputWrapper = styled.div`
   background-color: ${({ theme }) => theme.secondaryBg};

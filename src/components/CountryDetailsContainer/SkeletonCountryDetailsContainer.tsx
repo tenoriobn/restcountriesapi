@@ -1,14 +1,12 @@
-import { Link } from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
 import { BorderCountriesContainer, CountryDetails, CountryDetailsWrapper, CountryInfo, CountryInfoContainer } from '.';
 
 export default function SkeletonCountryDetailsContainer() {
   return (
     <CountryDetailsWrapper>
-      <p className="country-flag" >
-
+      <p className="country-flag" style={{ borderRadius: '4px' }} >
         <Skeleton 
-          className="country-flag" 
+          style={{ height: '100%' }}
         />
       </p>
 
@@ -35,13 +33,13 @@ export default function SkeletonCountryDetailsContainer() {
           <h3 className="border-countries__subtitle"><Skeleton /></h3>
           
           {Array(3).fill(null).map((_, index) => (
-            <Link
-              className="border-countries__list_link"
-              to="#"
+            <Skeleton
+              style={{ width: 'max-content', minWidth: '90px', height: '28px' }}
               key={index}
-            >
-              <Skeleton  />
-            </Link>
+              
+            />
+            //   <Skeleton  />
+            // </Skeleton>
           ))}
         </BorderCountriesContainer>
       </div>

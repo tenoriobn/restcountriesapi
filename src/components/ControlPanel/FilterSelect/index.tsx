@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
-import Arrow from "./assets/select-arrow.svg?react";
+import Arrow from "src/assets/icons/select-arrow.svg?react";
 import { IFilterSelect } from "src/common/interfaces/IFilterSelect";
 import { countryFilterState } from "src/common/states/atom";
-import { transitions } from "src/common/Themes/transitions";
+import { transitions } from "src/common/Themes/transitions"; 
 
 const Container = styled.div`
   position: relative;

@@ -1,16 +1,19 @@
 import { ThemeProvider } from "styled-components";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { darkModeState } from "src/common/states/atom";
 import GlobalStyles from "src/common/GlobalStyles/GlobalStyles";
 import Header from "../Header";
 import AppLayout from "../AppLayout/AppLayout";
 import HomePage from "src/pages/HomePage";
 import CountryOverview from "src/pages/CountryOverview";
 import { darkTheme, lightTheme } from "src/common/Themes/colors";
+import { useSessionStorageTheme } from "src/common/states/hook/useSessionStorage";
 
-export default function DefaultPage() {
-  const darkMode = useRecoilValue(darkModeState);
+export default function DefaultPage() {  
+  const { darkMode, loading } = useSessionStorageTheme();
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>

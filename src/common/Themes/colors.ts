@@ -14,22 +14,26 @@ export const colors = {
   faintGray: '#dddddd1f',
   darkSlate: '#232f3959',
   deepNavy: '#202c3760',
+  lightWarmGray: '#e7e2e2de',
+  mediumGray: '#b9b9b9',
+  desaturatedDarkBlue: '#3b4d5d2b',
+  charcoalBlueTransparent: '#11151775',
 };
 
 export const lightTheme: IThemeColors = {
   primaryBg: colors.veryLightGray,
   secondaryBg: colors.white,
   primaryText: colors.charcoalBlue,
-  primaryShadowColor: '#11151775',
+  primaryShadowColor: colors.charcoalBlueTransparent,
   primaryHover: colors.charcoalBlue,
   secondaryHover: colors.lightGray,
   primaryActive: colors.slateBlue,
   secondaryActive:  colors.darkGray,
-  borderColor: '#e7e2e2de',
-  placeholderColor: colors.lightGray,
-  
-  skeletonBaseColorImg: colors.darkSlate,
-  skeletonHighlightColor: colors.deepNavy,
+  borderColor: colors.lightWarmGray,
+  placeholderColor: colors.mediumGray,
+
+  skeletonBaseColor: colors.lightGray,
+  skeletonHighlightColor: colors.veryLightGray,
 };
 
 export const darkTheme: IThemeColors = {
@@ -41,9 +45,10 @@ export const darkTheme: IThemeColors = {
   secondaryHover: colors.softGray,
   primaryActive: colors.slateBlue,
   secondaryActive: colors.faintGray,
-  borderColor: '#3b4d5d2b',
+  borderColor: colors.desaturatedDarkBlue,
+  placeholderColor: colors.lightGray,
 
   skeletonBaseColorImg: colors.darkSlate,
+  skeletonBaseColor: colors.darkBlue,
   skeletonHighlightColor: colors.deepNavy,
-  placeholderColor: colors.lightGray,
 };

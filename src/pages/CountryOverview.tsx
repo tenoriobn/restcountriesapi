@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ArrowIcon from "../../public/assets/icons/Arrow-left.svg?react";
+import ArrowIcon from "src/assets/icons/Arrow-left.svg?react";
 import { BaseButton } from "src/common/GlobalStyles/GlobalStyles";
 import { Link } from "react-router-dom";
 import CountryDetailsContainer from "src/components/CountryDetailsContainer";

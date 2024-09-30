@@ -16,6 +16,7 @@ export const CountryDetailsWrapper = styled(motion.div)`
   gap: 3.875rem;
 
   .country-flag {
+    border: .0625rem solid ${({ theme }) => theme.borderColor};
     object-fit: cover;
     width: 100%;
     max-width: 560px;
@@ -40,7 +41,7 @@ export const CountryDetailsWrapper = styled(motion.div)`
   }
 
   @media (min-width: 1440px) {
-    gap: 2rem;
+    gap: 1.75rem;
   }
 `;
 

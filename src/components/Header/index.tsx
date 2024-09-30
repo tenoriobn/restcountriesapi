@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Moon from './assets/Moon.svg?react';
+import Moon from 'src/assets/icons/Moon.svg?react';
 import { useRecoilState } from 'recoil';
 import { darkModeState } from 'src/common/states/atom';
 import { transitions } from 'src/common/Themes/transitions';
@@ -101,15 +101,20 @@ const MoonIcon = styled(Moon)`
 export default function Header() {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
 
+  console.log('darkMode', darkMode);
+
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode); 
+    localStorage.setItem('darkMode', JSON.stringify(!darkMode));
+  };
+
   return (
     <HeaderContainer>
       <ContentWrapper>
         <Title>Where in the world?</Title>
           
         <DarkModeLabel 
-          onClick={() => {
-            setDarkMode(!darkMode); 
-          }}
+          onClick={() => { handleDarkMode(); }}
         >
           <MoonIcon /> 
           Dark Mode

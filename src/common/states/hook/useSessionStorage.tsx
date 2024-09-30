@@ -1,6 +1,6 @@
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { errorStatusState, selectedCountryState } from "../atom";
-import { useEffect } from "react";
+import { darkModeState, errorStatusState, selectedCountryState } from "../atom";
+import { useEffect, useState } from "react";
 
 export default function useSessionStorage() {
   const [selectedCountry, setSelectedCountry] = useRecoilState(selectedCountryState);
@@ -18,4 +18,21 @@ export default function useSessionStorage() {
       setErrorStatus(true);
     }
   }, [selectedCountry, setSelectedCountry, setErrorStatus]);
+}
+
+export function useSessionStorageTheme() {
+  const [darkMode, setDarkMode] = useRecoilState(darkModeState);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const storedDarkMode = localStorage.getItem('darkMode');
+    
+    if (storedDarkMode !== null) {
+      setDarkMode(JSON.parse(storedDarkMode));
+    }
+
+    setLoading(false);
+  }, [setDarkMode]);
+
+  return { darkMode, loading };
 }

@@ -35,7 +35,7 @@ export default function AppLayout() {
   return (
     <MainContainer>
       <SkeletonTheme
-        baseColor={theme.secondaryBg} 
+        baseColor={theme.skeletonBaseColor} 
         highlightColor={theme.skeletonHighlightColor}
         duration={1.5}
       >
