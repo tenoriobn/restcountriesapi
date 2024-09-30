@@ -28,6 +28,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
   justify-content: space-between;
 
   background-color: ${({ theme }) => theme.secondaryBg};
+  border: .0625rem solid ${({ theme }) => theme.borderColor};
   border-radius: .375rem;
   box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
   box-sizing: border-box;
@@ -40,7 +41,7 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
 
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
-      border: .125rem solid #d1d1d1;
+      border: .125rem solid ${props.theme.primaryHover};
       background-color: ${props.theme.primaryBg};
       box-shadow: 0rem .25rem .75rem -0.1875rem ${props.theme.primaryShadowColor};
     ` : '' }
@@ -57,6 +58,7 @@ const Label = styled.label<{ $optionSelect: string | null; $openListOptions: boo
   
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
+      color: ${props.theme.primaryText};
       background: ${props.theme.primaryBg};
       padding: 0 .5rem;
       transform: translate(-16px, -30px) scale(0.88);
@@ -97,12 +99,17 @@ const Options = styled.li`
   }
 `;
 
-const SelectArrowIcon = styled(Arrow)<{ $openListOptions: boolean }>`
+const SelectArrowIcon = styled(Arrow)<{  $optionSelect: string | null; $openListOptions: boolean }>`
   transform:  ${props => props.$openListOptions ? 'rotate(180deg)' : ''};
   transition: ${transitions.smoothTransition};
   width: 10px;
-  path {
-    stroke: ${({ theme }) => theme.primaryText};
+  
+  path { 
+    stroke-width: 2.5;
+    stroke: ${props =>
+    props.$openListOptions || props.$optionSelect
+      ? `${props.theme.primaryText}`
+      : `${props.theme.placeholderColor}`};
   }
 `;
 
@@ -174,7 +181,10 @@ export default function FilterSelect() {
         </Label>
 
         <p>{countryFilter && countryFilter.select ? countryFilter.select : ''}</p>
-        <SelectArrowIcon $openListOptions={openListOptions} />
+        <SelectArrowIcon 
+          $optionSelect={countryFilter ? countryFilter.select ?? null : null}
+          $openListOptions={openListOptions} 
+        />
       </FilterSelectWrapper>
 
       <ListOptions open={openListOptions}>

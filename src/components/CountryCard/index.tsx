@@ -34,6 +34,7 @@ export const CountryCardsContainer = styled.div`
     article {
       display: inherit;
       background-color: ${({ theme }) => theme.secondaryBg};
+      border: .0625rem solid ${({ theme }) => theme.borderColor};
       border-radius: .375rem;
       overflow: auto;
       height: 100%;

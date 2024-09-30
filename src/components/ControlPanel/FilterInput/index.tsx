@@ -17,9 +17,9 @@ const FilterInputWrapper = styled.div`
 const Input = styled.input`
   appearance: none;
   outline: none;
-  border: none;
   position: absolute;
-  background-color: transparent;
+  background-color: ${({ theme }) => theme.secondaryBg};
+  border: .0625rem solid ${({ theme }) => theme.borderColor};
   border-radius: .375rem;
   box-sizing: border-box;
   box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
@@ -46,6 +46,12 @@ const Input = styled.input`
     z-index: 6;
     padding: 0 .5rem;
     transition: ${transitions.smoothTransition};
+
+    svg {
+      path {
+        stroke: ${({ theme }) => theme.primaryText};
+      }
+    }
   }
 `;
 
@@ -53,6 +59,7 @@ const Label = styled.label`
   display: flex;
   align-items: center;
   gap: 1rem;
+  z-index: 9;
 
   position: absolute;
   color: ${({ theme }) => theme.placeholderColor};

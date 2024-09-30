@@ -41,12 +41,11 @@ export const BaseButton = css`
   transition: ${transitions.smoothTransition};
 
   &:hover {
-    border-color: #2c3741;
-    background-color: #2c3741;
+    border-color: ${({ theme }) => theme.secondaryHover};
+    background-color: ${({ theme }) => theme.secondaryHover};
   }
 
   &:active {
     border-color: ${({ theme }) => theme.primaryHover};
-    background: ${({ theme }) => theme.primaryBg};
   }
 `;

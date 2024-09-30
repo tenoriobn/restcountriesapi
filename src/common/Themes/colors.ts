@@ -20,14 +20,16 @@ export const lightTheme: IThemeColors = {
   primaryBg: colors.veryLightGray,
   secondaryBg: colors.white,
   primaryText: colors.charcoalBlue,
-  primaryShadowColor: '',
-  primaryHover: '',
-  secondaryHover: '',
-  primaryActive: '',
-  secondaryActive: '',
-  skeletonBaseColorImg: '',
-  skeletonHighlightColor: '',
+  primaryShadowColor: '#11151775',
+  primaryHover: colors.charcoalBlue,
+  secondaryHover: colors.lightGray,
+  primaryActive: colors.slateBlue,
+  secondaryActive:  colors.darkGray,
+  borderColor: '#e7e2e2de',
   placeholderColor: colors.lightGray,
+  
+  skeletonBaseColorImg: colors.darkSlate,
+  skeletonHighlightColor: colors.deepNavy,
 };
 
 export const darkTheme: IThemeColors = {
@@ -39,6 +41,7 @@ export const darkTheme: IThemeColors = {
   secondaryHover: colors.softGray,
   primaryActive: colors.slateBlue,
   secondaryActive: colors.faintGray,
+  borderColor: '#3b4d5d2b',
 
   skeletonBaseColorImg: colors.darkSlate,
   skeletonHighlightColor: colors.deepNavy,

@@ -106,7 +106,11 @@ export default function Header() {
       <ContentWrapper>
         <Title>Where in the world?</Title>
           
-        <DarkModeLabel onClick={() => setDarkMode(!darkMode)}>
+        <DarkModeLabel 
+          onClick={() => {
+            setDarkMode(!darkMode); 
+          }}
+        >
           <MoonIcon /> 
           Dark Mode
         </DarkModeLabel>

@@ -25,12 +25,8 @@
 * Boxshadow nos cards***
 * Se possível ao clicar na imagem dentro do Overview abrir um modal com a imagem em tamanho grande ***
 * Colocar lupa de pesquisa no search***
-
-
-
 * Implementar tema Dark/Light (ARMAZENAR COR ESCOLHIDA NO LOCALSTORAGE) ///
   - Reajustar estilos (principal light), guardar o status do tema
-
 
 
 * Performance (memo, outras ferramentas)
