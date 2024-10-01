@@ -1,16 +1,16 @@
 import { createGlobalStyle, css } from "styled-components";
-import Colors from "./Colors";
-// import { Link } from "react-router-dom";
+import typography from "../Themes/typography";
+import { transitions } from "../Themes/transitions";
 
 const GlobalStyles = createGlobalStyle`
   body {
-    background-color: ${Colors.veryDarkBlue};
-    color: ${Colors.white};
-    font-family: 'Nunito Sans';
+    background-color: ${({ theme }) => theme.primaryBg};
+    color: ${({ theme }) => theme.primaryText};
+    font-family: ${typography.fonts.nunito};
     font-weight: 400;
 
     input, select, button {
-      font-family: 'Nunito Sans';
+      font-family: ${typography.fonts.nunito};
     }
 
     button {
@@ -21,11 +21,11 @@ const GlobalStyles = createGlobalStyle`
 export default GlobalStyles;
 
 export const BaseButton = css`
-  border: .125rem solid ${Colors.darkBlue};
+  border: .125rem solid ${({ theme }) => theme.secondaryBg};
   border-radius: .25rem;
 
-  background-color: ${Colors.darkBlue};
-  box-shadow: 0rem -0.25rem 1.125rem -0.25rem ${Colors.charcoalBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
+  box-shadow: 0rem -0.25rem 1.125rem -0.25rem ${({ theme }) => theme.primaryShadowColor};
   box-sizing: border-box;
   
   display: flex;
@@ -33,17 +33,19 @@ export const BaseButton = css`
   align-items: center;
   
   cursor: pointer;
-  color: white;
+  color: ${({ theme }) => theme.primaryText};
   text-decoration: none;
+  text-align: center;
   width: 100%;
 
+  transition: ${transitions.smoothTransition};
+
   &:hover {
-    border-color: #2c3741;
-    background-color: #2c3741;
+    border-color: ${({ theme }) => theme.secondaryHover};
+    background-color: ${({ theme }) => theme.secondaryHover};
   }
 
   &:active {
-    border-color: ${Colors.darkGrayHover};
-    background: ${Colors.veryDarkBlue};
+    border-color: ${({ theme }) => theme.primaryHover};
   }
 `;

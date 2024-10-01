@@ -6,6 +6,7 @@ const ControlPanelContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.375rem;
+  margin-bottom: 3.125rem;
 
   @media (min-width: 768px) {
     flex-direction: row;

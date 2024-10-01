@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Colors from "../../../common/GlobalStyles/Colors";
-import { IFilterSelect } from "../../../common/interfaces/IFilterSelect";
-import Arrow from "./assets/select-arrow.svg?react";
-import { useEffect, useState } from "react";
-import { countryFilterState } from "../../../common/states/atom";
 import { useRecoilState } from "recoil";
+import { useEffect, useState } from "react";
+import Arrow from "src/assets/icons/select-arrow.svg?react";
+import { IFilterSelect } from "src/common/interfaces/IFilterSelect";
+import { countryFilterState } from "src/common/states/atom";
+import { transitions } from "src/common/Themes/transitions"; 
 
 const Container = styled.div`
   position: relative;
@@ -27,9 +27,10 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
   align-items: center;
   justify-content: space-between;
 
-  background-color: ${Colors.darkBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
+  border: .0625rem solid ${({ theme }) => theme.borderColor};
   border-radius: .375rem;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
   box-sizing: border-box;
   line-height: 3.625rem;
 
@@ -40,9 +41,9 @@ const FilterSelectWrapper = styled.div<{ $optionSelect: string | null; $openList
 
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
-      border: .125rem solid #d1d1d1;
-      background-color: #202c37;
-      box-shadow: 0rem .25rem .75rem -0.1875rem #111517;
+      border: .125rem solid ${props.theme.primaryHover};
+      background-color: ${props.theme.primaryBg};
+      box-shadow: 0rem .25rem .75rem -0.1875rem ${props.theme.primaryShadowColor};
     ` : '' }
 `;
 
@@ -52,11 +53,13 @@ const Label = styled.label<{ $optionSelect: string | null; $openListOptions: boo
   font-size: 1rem;
   font-weight: 500;
   line-height: normal;
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
+  color: ${({ theme }) => theme.placeholderColor};
   
   ${props => (props.$optionSelect || props.$openListOptions) ? 
     `
-      background: #202c37;
+      color: ${props.theme.primaryText};
+      background: ${props.theme.primaryBg};
       padding: 0 .5rem;
       transform: translate(-16px, -30px) scale(0.88);
       z-index: 6;
@@ -68,9 +71,9 @@ const ListOptions = styled.ul<{ open: boolean }>`
   flex-direction: column;
 
   box-sizing: border-box;
-  background-color: ${Colors.darkBlue};
+  background-color: ${({ theme }) => theme.secondaryBg};
   border-radius: .375rem;
-  box-shadow: 0rem .25rem .5625rem -0.4375rem #111517;
+  box-shadow: 0rem .25rem .5625rem -0.4375rem ${({ theme }) => theme.primaryShadowColor};
 
   padding:  ${props => props.open ? '1rem 0rem' : '0rem'};
   height:  ${props => props.open ? 'max-content' : '0px'};
@@ -79,27 +82,35 @@ const ListOptions = styled.ul<{ open: boolean }>`
   position: absolute;
   overflow: hidden;
   top: 60px;
-  /* transition: all .2s ease-in; */
+  z-index: 999;
 `;
 
 const Options = styled.li`
   cursor: pointer;
   padding: .5rem 1.5rem;
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
 
   &.active {
-    background-color: ${Colors.lightGrayActive}!important;
+    background-color: ${({ theme }) => theme.secondaryActive}!important;
   }
   
   &:hover {
-    background-color: ${Colors.lightGrayHover};
+    background-color: ${({ theme }) => theme.secondaryHover};
   }
 `;
 
-const SelectArrowIcon = styled(Arrow)<{ $openListOptions: boolean }>`
+const SelectArrowIcon = styled(Arrow)<{  $optionSelect: string | null; $openListOptions: boolean }>`
   transform:  ${props => props.$openListOptions ? 'rotate(180deg)' : ''};
-  transition: all .2s ease-in-out;
+  transition: ${transitions.smoothTransition};
   width: 10px;
+  
+  path { 
+    stroke-width: 2.5;
+    stroke: ${props =>
+    props.$openListOptions || props.$optionSelect
+      ? `${props.theme.primaryText}`
+      : `${props.theme.placeholderColor}`};
+  }
 `;
 
 const options:IFilterSelect[] = [
@@ -170,7 +181,10 @@ export default function FilterSelect() {
         </Label>
 
         <p>{countryFilter && countryFilter.select ? countryFilter.select : ''}</p>
-        <SelectArrowIcon $openListOptions={openListOptions} />
+        <SelectArrowIcon 
+          $optionSelect={countryFilter ? countryFilter.select ?? null : null}
+          $openListOptions={openListOptions} 
+        />
       </FilterSelectWrapper>
 
       <ListOptions open={openListOptions}>
