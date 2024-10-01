@@ -42,7 +42,7 @@ const Input = styled.input`
     color: ${({ theme }) => theme.primaryText};
     height: 30px;
     line-height: 1.875rem;
-    transform: translate(16px, -18px) scale(0.88);
+    transform: translate(16px, -17px) scale(0.88);
     z-index: 6;
     padding: 0 .5rem;
     transition: ${transitions.smoothTransition};
@@ -60,6 +60,7 @@ const Label = styled.label`
   align-items: center;
   gap: 1rem;
   z-index: 9;
+  cursor: text;
 
   position: absolute;
   color: ${({ theme }) => theme.placeholderColor};

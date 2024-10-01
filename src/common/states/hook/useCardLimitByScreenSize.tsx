@@ -6,7 +6,7 @@ export function useCardLimitByScreenSize() {
 
   useEffect(() => {
     const handleResize = () => {
-      const screenWidth = window.innerWidth > 951 && window.innerWidth < 1295 ? 9 : 8;
+      const screenWidth = window.innerWidth > 1026 && window.innerWidth < 1395 ? 9 : 8;
 
       if (limit.cardsLimit !== screenWidth) {
         setLimit({ sliceLimit: screenWidth, cardsLimit: screenWidth });

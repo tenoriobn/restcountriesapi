@@ -43,6 +43,7 @@ export const CountryCardsContainer = styled.div`
         width: 100%;
         height: 198px;
         object-fit: cover;
+        border-bottom: .0625rem solid ${({ theme }) => theme.borderColor};
       }
     }
 
