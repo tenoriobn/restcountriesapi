@@ -1,22 +1,30 @@
-# Frontend Mentor - API REST de Países com Alternador de Tema de Cores
+# 🌍 API REST de Países com Alternador de Tema de Cores
 
 ![Design para desktop](./public/design/desktop-preview.jpg)
 
-## Bem-vindo! 👋
+## 📋 Descrição
 
-**Para completar este desafio, utilizei meus conhecimentos em HTML, CSS e JavaScript.**
+Este projeto foi desenvolvido com **React** e **TypeScript**, utilizando a [API REST Countries](https://restcountries.com) para buscar e exibir informações sobre diversos países. A aplicação conta com busca por país, filtragem por região, exibição de detalhes e alternância de temas (modo claro/escuro).
 
-## O Desafio
+## 🚀 Funcionalidades Principais
 
-O meu desafio foi integrar à [API REST Countries](https://restcountries.com) para extrair dados dos países e exibi-los conforme os designs fornecidos.
+- 🗺️ **Visualização de países**: Exibe todos os países da API na página inicial com paginação.
+- 🔍 **Busca e Filtros**: Pesquise países por nome e filtre por região.
+- 🗃️ **Detalhes de países**: Veja informações detalhadas sobre cada país, incluindo países fronteiriços.
+- 🌑 **Modo Claro/Escuro**: Alterne entre temas, com persistência do tema escolhido no **LocalStorage**.
+- ⚙️ **Skeleton de carregamento**: Exibe um esqueleto enquanto os dados são carregados.
+- 💡 **Mensagens de erro e ausência de resultados**: Informações claras ao usuário em casos de falha ou ausência de dados.
+- 🎨 **Animações fluidas**: Utilização da biblioteca **Framer Motion** para animações suaves.
+- 🧭 **Importações Absolutas**: Melhora na organização de importações com caminhos absolutos.
 
-Os usuários da minha aplicação podem:
+## 🛠️ Tecnologias Utilizadas
 
-- Visualizar todos os países da API na página inicial
-- Pesquisar por um país usando o campo de pesquisa
-- Filtrar países por região
-- Clicar em um país para ver informações detalhadas em uma página separada
-- Clicar nos países fronteiriços na página de detalhes
-- Alternar o esquema de cores entre o modo claro e escuro
-
-**⚠️ NOTA ⚠️: Às vezes, a API REST dos países pode ficar inativa, portanto, esteja ciente de possíveis interrupções.**
+- **React**: Biblioteca principal para a construção da interface.
+- **TypeScript**: Tipagem estática para maior segurança no código.
+- **React Query**: Gerenciamento de dados assíncronos e cache.
+- **Axios**: Cliente HTTP para realizar as requisições à API.
+- **Recoil**: Gerenciamento de estado global de forma simples e eficiente.
+- **Styled-components**: Estilização com CSS-in-JS, facilitando temas dinâmicos.
+- **React Router DOM**: Navegação entre páginas.
+- **Framer Motion**: Animações para transições suaves.
+- **react-loading-skeleton**: Exibição de esqueleto de carregamento durante as requisições.
