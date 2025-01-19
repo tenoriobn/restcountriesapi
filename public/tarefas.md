@@ -31,3 +31,8 @@
 
 * Performance (memo, outras ferramentas)
 * Test Cypress ou Unitário
+
+  * Testar FilterInput:
+    - Primeiro Teste Para FilterInput, primeiro ver se renderiza;
+    - Segundo ver se mostra a "label" certa que seria "Search for a country...";
+    - Terceiro conferir se é possível digitar no input e verificar se foi o digitado;
