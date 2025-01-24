@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "value": "",
+    "name": "Remove Filter"
+  },
+  {
+    "id": 1,
+    "value": "Africa",
+    "name": "Africa"
+  },
+  {
+    "id": 2,
+    "value": "Americas",
+    "name": "América"
+  },
+  {
+    "id": 3,
+    "value": "Asia",
+    "name": "Asia"
+  },
+  {
+    "id": 4,
+    "value": "Europe",
+    "name": "Europe"
+  },
+  {
+    "id": 5,
+    "value": "Oceania",
+    "name": "Oceania"
+  }
+]

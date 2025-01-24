@@ -30,9 +30,18 @@
 
 
 * Performance (memo, outras ferramentas)
-* Test Cypress ou Unitário
+* Teste unitário, depois teste de integração para verificar se os componentes interagem entre sí
 
   * Testar FilterInput:
-    - Primeiro Teste Para FilterInput, primeiro ver se renderiza;
-    - Segundo ver se mostra a "label" certa que seria "Search for a country...";
-    - Terceiro conferir se é possível digitar no input e verificar se foi o digitado;
+    OK - Primeiro Teste Para FilterInput, primeiro ver se renderiza;
+    OK - Segundo ver se mostra a "label" certa que seria "Search for a country...";
+    OK - Terceiro conferir se é possível digitar no input e verificar se foi o digitado;
+
+
+  * Testar FilterSelect:
+    - Conferir renderizção inicial do componentes
+    - Conferior se está mostrando `Filter by Region` como label inicial
+    - Conferir se é possível selecionar uma das options e se ela é renderizada como opção selecionada.
+
+  * Testar DarkMode
+  * Testar Card

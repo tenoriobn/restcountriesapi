@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import Arrow from "src/assets/icons/select-arrow.svg?react";
-import { IFilterSelect } from "src/common/interfaces/IFilterSelect";
+import options from "./options.json";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions"; 
 
@@ -113,39 +113,6 @@ const SelectArrowIcon = styled(Arrow)<{  $optionSelect: string | null; $openList
   }
 `;
 
-const options:IFilterSelect[] = [
-  {
-    id: 0,
-    value: '',
-    name: 'Remove Filter'
-  },
-  {
-    id: 1,
-    value: 'Africa',
-    name: 'Africa'
-  },
-  {
-    id: 2,
-    value: 'Americas',
-    name: 'América'
-  },
-  {
-    id: 3,
-    value: 'Asia',
-    name: 'Asia'
-  },
-  {
-    id: 4,
-    value: 'Europe',
-    name: 'Europe'
-  },
-  {
-    id: 5,
-    value: 'Oceania',
-    name: 'Oceania'
-  },
-];
-
 export default function FilterSelect() {
   const [openListOptions, setOpenListOptions] = useState(false);
   const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
@@ -166,13 +133,15 @@ export default function FilterSelect() {
   }, []);
 
   return (
-    <Container id="filter-select-container">
+    <Container id="filter-select-container" data-testid="filter-select-container">
       <FilterSelectWrapper 
+        data-testid="filter-select"
         onClick={() => setOpenListOptions(!openListOptions)}
         $optionSelect={countryFilter ? countryFilter.select ?? null : null}
         $openListOptions={openListOptions}
       >
         <Label 
+          data-testid="label"
           className="labelline" 
           $optionSelect={countryFilter ? countryFilter.select ?? null : null}
           $openListOptions={openListOptions}
@@ -180,14 +149,16 @@ export default function FilterSelect() {
           Filter by Region
         </Label>
 
-        <p>{countryFilter && countryFilter.select ? countryFilter.select : ''}</p>
+        <p data-testid="selected-option">
+          {countryFilter && countryFilter.select ? countryFilter.select : ''}
+        </p>
         <SelectArrowIcon 
           $optionSelect={countryFilter ? countryFilter.select ?? null : null}
           $openListOptions={openListOptions} 
         />
       </FilterSelectWrapper>
 
-      <ListOptions open={openListOptions}>
+      <ListOptions open={openListOptions} data-testid="list-options">
         {
           (countryFilter && countryFilter.select ? options : options.filter(option => option.id !== 0))
             .map(option => (
