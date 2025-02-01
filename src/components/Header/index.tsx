@@ -101,8 +101,6 @@ const MoonIcon = styled(Moon)`
 export default function Header() {
   const [darkMode, setDarkMode] = useRecoilState(darkModeState);
 
-  console.log('darkMode', darkMode);
-
   const handleDarkMode = () => {
     setDarkMode(!darkMode); 
     localStorage.setItem('darkMode', JSON.stringify(!darkMode));
@@ -115,8 +113,9 @@ export default function Header() {
           
         <DarkModeLabel 
           onClick={() => { handleDarkMode(); }}
+          aria-label="Dark Mode"
         >
-          <MoonIcon /> 
+          <MoonIcon data-testid="moon-icon" /> 
           Dark Mode
         </DarkModeLabel>
       </ContentWrapper>

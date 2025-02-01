@@ -39,9 +39,13 @@
 
 
   * Testar FilterSelect:
-    - Conferir renderizção inicial do componentes
-    - Conferior se está mostrando `Filter by Region` como label inicial
-    - Conferir se é possível selecionar uma das options e se ela é renderizada como opção selecionada.
+    OK - Conferir renderizção inicial do componentes
+    OK - Conferior se está mostrando `Filter by Region` como label inicial
+    OK - Conferir se é possível selecionar uma das options e se ela é renderizada como opção selecionada.
 
-  * Testar DarkMode
+  * Testar Header e DarkMode
+    OK - Conferir se os elementos do componente `<Header />` estão sendo renderizados
+    - Testar onClick do botão `DarkMode`
+
+
   * Testar Card
