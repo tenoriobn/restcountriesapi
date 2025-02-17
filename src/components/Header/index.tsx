@@ -107,7 +107,7 @@ export default function Header() {
   };
 
   return (
-    <HeaderContainer>
+    <HeaderContainer data-testid="header-container">
       <ContentWrapper>
         <Title>Where in the world?</Title>
           

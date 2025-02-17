@@ -48,4 +48,9 @@
     - Testar onClick do botão `DarkMode`
 
 
+    ** Refatorar testes anteriores para seguir a padronização de escritura de código igual a do reder
+      primeiro acessando a `screen`, depois acessando pela `role`, depois `aria-label` e por fim `data-test`
+    **
+
+
   * Testar Card
