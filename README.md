@@ -16,6 +16,7 @@ Este projeto foi desenvolvido com **React** e **TypeScript**, utilizando a [API 
 - 💡 **Mensagens de erro e ausência de resultados**: Informações claras ao usuário em casos de falha ou ausência de dados.
 - 🎨 **Animações fluidas**: Utilização da biblioteca **Framer Motion** para animações suaves.
 - 🧭 **Importações Absolutas**: Melhora na organização de importações com caminhos absolutos.
+- 🧪 **React Testing Library + Vitest**: Realiza testes automatizados para garantir a qualidade do código e o funcionamento da aplicação.
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -28,3 +29,5 @@ Este projeto foi desenvolvido com **React** e **TypeScript**, utilizando a [API 
 - **React Router DOM**: Navegação entre páginas.
 - **Framer Motion**: Animações para transições suaves.
 - **react-loading-skeleton**: Exibição de esqueleto de carregamento durante as requisições.
+- **React Testing Library**: Utilizada para simular interações do usuário e testar o comportamento da interface de forma semelhante ao que o usuário final experimentaria.
+- **Vitest**: Framework de testes utilizado para rodar e estruturar os testes, garantindo a qualidade do código.
