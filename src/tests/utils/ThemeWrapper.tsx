@@ -1,15 +1,9 @@
-import { RecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { ThemeProvider } from "styled-components";
-import { RecoilObserver } from "./recoilObserver"; // Presumindo que você tenha este arquivo com o RecoilObserver implementado
+import { RecoilObserver } from "./recoilObserver";
 import { darkTheme, lightTheme } from "src/common/Themes/colors";
-import { ReactNode } from "react";
 import { darkModeState } from "src/common/states/atom";
-
-interface ThemeWrapperProps<T> {
-  state: RecoilState<T>; 
-  onChangeMock: () => void;
-  children: ReactNode;
-}
+import { ThemeWrapperProps } from "src/common/interfaces/IThemeWrapperProps";
 
 export const ThemeWrapper = <T,>({ state, onChangeMock, children }: ThemeWrapperProps<T>) => {
   const darkMode = useRecoilValue(darkModeState);

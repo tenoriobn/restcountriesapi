@@ -5,8 +5,8 @@ import { countryFilterState } from "src/common/states/atom";
 import customRender from "src/tests/utils/customRender";
 import { RecoilObserver } from "src/tests/utils/recoilObserver";
 import FilterInput from ".";
+import { UserEvent } from "@testing-library/user-event";
 
-// Função comum para renderizar o componente com o RecoilObserver
 const renderWithRecoil = () => {
   const onChangeMock = vi.fn();
 
@@ -21,35 +21,31 @@ const renderWithRecoil = () => {
 };
 
 describe('<FilterInput />', () => {
-  it('should render the component properly', () => {
-    renderWithRecoil();
+  let user: UserEvent;
+  let onChangeMock: () => { input: string };
+  let input: HTMLElement;
+  const searchValue = 'Brazil';
 
-    expect(screen.getByRole('textbox')).toBeInTheDocument();
+  beforeEach(async () => {
+    ({ user, onChangeMock } = renderWithRecoil());
+    input = await screen.getByRole('textbox');
+  });
+
+  it('should render the component properly', () => {
+    expect(input).toBeInTheDocument();
   });
 
   it('should render the label text "Search for a country..."', () => {
-    renderWithRecoil();
-
-    expect(screen.getByText('Search for a country...')).toBeInTheDocument();
+    expect(screen.getByLabelText('Search for a country...')).toBeInTheDocument();
   });
 
   it('should update the input value when typing', () => {
-    const searchValue = 'Brazil';
-    renderWithRecoil();
-
-    const input = screen.getByRole('textbox');
     fireEvent.change(input, { target: { value: searchValue } });
-
     expect(input).toHaveValue(searchValue);
   });
 
   it('should update the state with the input value', async () => {
-    const searchValue = 'Brazil';
-    const { user, onChangeMock } = renderWithRecoil();
-
-    const input = screen.getByRole('textbox');
     await user.type(input, searchValue);
-
     expect(onChangeMock).toHaveBeenLastCalledWith({ input: searchValue });
   });
 });
