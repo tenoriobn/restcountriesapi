@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
-import Arrow from "src/assets/icons/select-arrow.svg?react";
+import ArrowIcon from "src/assets/icons/select-arrow.svg?react";
 import options from "./options.json";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions"; 
@@ -99,7 +99,7 @@ const Options = styled.li`
   }
 `;
 
-const SelectArrowIcon = styled(Arrow)<{  $optionSelect: string | null; $openListOptions: boolean }>`
+const SelectArrowIcon = styled(ArrowIcon)<{  $optionSelect: string | null; $openListOptions: boolean }>`
   transform:  ${props => props.$openListOptions ? 'rotate(180deg)' : ''};
   transition: ${transitions.smoothTransition};
   width: 10px;
@@ -135,13 +135,15 @@ export default function FilterSelect() {
   return (
     <Container id="filter-select-container" data-testid="filter-select-container">
       <FilterSelectWrapper 
-        data-testid="filter-select"
+        role="combobox"
+        aria-labelledby="region-label"
         onClick={() => setOpenListOptions(!openListOptions)}
         $optionSelect={countryFilter ? countryFilter.select ?? null : null}
         $openListOptions={openListOptions}
       >
         <Label 
-          data-testid="label"
+          // data-testid="label"
+          id="region-label"
           className="labelline" 
           $optionSelect={countryFilter ? countryFilter.select ?? null : null}
           $openListOptions={openListOptions}
@@ -149,10 +151,12 @@ export default function FilterSelect() {
           Filter by Region
         </Label>
 
-        <p data-testid="selected-option">
+        <p role="option" aria-selected="true">
           {countryFilter && countryFilter.select ? countryFilter.select : ''}
         </p>
+
         <SelectArrowIcon 
+          aria-label="Arrow pointing down"
           $optionSelect={countryFilter ? countryFilter.select ?? null : null}
           $openListOptions={openListOptions} 
         />
