@@ -8,7 +8,7 @@ OK - FilterInput {
   Testar captura de texto
 }
 
-FilterSelect {
+OK - FilterSelect {
   Testar Renderização
   Testar Lista Aberta/Fechada
   Testar seleção de option
