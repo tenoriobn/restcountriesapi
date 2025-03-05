@@ -3,8 +3,6 @@ import { getApi } from 'src/utils/http';
 import { ICountry } from '../../interfaces/ICountry';
 
 export function useCountryNamesFromCodes(country: ICountry) {
-  console.log('country: ', country);
-
   const bordersCountries = country?.borders?.join(',') || '';
 
   const { data: borderCountriesData = [], isLoading, isError } = useQuery({

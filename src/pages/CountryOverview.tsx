@@ -25,11 +25,10 @@ export const StylizedLink = styled(Link)`
 `;
 
 export default function CountryOverview() {
-
   return (
     <div>
       <StylizedLink to="/">
-        <ArrowIcon />
+        <ArrowIcon data-testid="arrow-icon" />
         Back
       </StylizedLink>
 

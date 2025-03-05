@@ -9,7 +9,7 @@ export default function SkeletonCountryCard() {
   return (
     <CountryCardsContainer>
       {Array(8).fill(null).map((_, index) => (
-        <Link to="/" key={index}>
+        <Link to="/" key={index} data-testid="skeleton-country-card">
           <article>
             <Skeleton height={160} baseColor={theme.skeletonBaseColorImg}   />
             <CountryCardDetails>

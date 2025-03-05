@@ -134,7 +134,7 @@ export default function CountryCard() {
   const setSelectedCountry = useSetRecoilState(selectedCountryState);
   const countryFilter = useRecoilValue(countryFilterState);
   const { filteredCountries, isLoading, isError } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
-  const {limit, setLimit} = useCardLimitByScreenSize();
+  const { limit, setLimit } = useCardLimitByScreenSize();
   const animation = animatedTransition();
 
   if (isLoading) {
@@ -152,16 +152,16 @@ export default function CountryCard() {
   return (
     <CardsContainerWrapper>
       <CountryCardsContainer>
-        { filteredCountries.length > 0 ?
+        {filteredCountries.length > 0 ?
           filteredCountries.slice(0, limit.sliceLimit).map((country) => (
-            <Link 
-              to="/overview" 
+            <Link
+              to="/overview"
               key={country.name.common}
               onClick={() => setSelectedCountry(country)}
-            >        
+            >
               <motion.article {...animation}>
                 <img src={country.flags.png} alt={`Bandeira - ${country.name.common}`} />
-                
+
                 <CountryCardDetails>
                   <h2>{country.name.common}</h2>
                   <div>
@@ -177,13 +177,13 @@ export default function CountryCard() {
         }
       </CountryCardsContainer>
 
-      {filteredCountries.length > limit.cardsLimit ? 
+      {filteredCountries.length > limit.cardsLimit ?
         (
           <StylizedButton
             onClick={() =>
               filteredCountries.length > limit.sliceLimit
-                ? setLimit({...limit, sliceLimit: limit.sliceLimit + limit.cardsLimit})
-                : setLimit({...limit, sliceLimit: limit.cardsLimit})
+                ? setLimit({ ...limit, sliceLimit: limit.sliceLimit + limit.cardsLimit })
+                : setLimit({ ...limit, sliceLimit: limit.cardsLimit })
             }
           >
             {filteredCountries.length > limit.sliceLimit ? 'Load More' : 'Show Less'}
