@@ -35,7 +35,6 @@ export interface ICountry {
   capital: string[];
   tld: string[];
   currencies: ICurrencies;
-  languages: string[];
+  languages: { [key: string]: string };
   borders: string[];
-  error: boolean;
 }
