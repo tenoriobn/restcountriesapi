@@ -28,7 +28,8 @@ CountryOverview {
 }
 
 CountryDetailsContainer {
-  Testar renderização do componente
-  Testar renderização dos elementos (img, descriptions, sugestões)
-  Testar se sugestões é clicável
+  OK - Testar renderização do Skeeleton
+  OK - Testar renderização do MessageError
+  OK - Testar renderização dos elementos (img, descriptions, sugestões)
+  OK - Testar se sugestões é clicável
 }
