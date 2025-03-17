@@ -1,6 +1,6 @@
 import { ICountry } from "src/common/interfaces/ICountry";
 
-export const mockCountryDetails: ICountry = {
+export const mockBrazilCountryDetails: ICountry = {
   "flags": {
     "png": "https://flagcdn.com/w320/br.png",
     "svg": "https://flagcdn.com/br.svg",
@@ -46,4 +46,47 @@ export const mockCountryDetails: ICountry = {
     "VEN"
   ],
   "population": 212559409
+};
+
+export const mockColombiaCountryDetails: ICountry = {
+  "flags": {
+    "png": "https://flagcdn.com/w320/co.png",
+    "svg": "https://flagcdn.com/co.svg",
+    "alt": "The flag of Colombia is composed of three horizontal bands of yellow, blue and red, with the yellow band twice the height of the other two bands."
+  },
+  "name": {
+    "common": "Colombia",
+    "official": "Republic of Colombia",
+    "nativeName": {
+      "spa": {
+        "official": "República de Colombia",
+        "common": "Colombia"
+      }
+    }
+  },
+  "tld": [
+    ".co"
+  ],
+  "currencies": {
+    "COP": {
+      "name": "Colombian peso",
+      "symbol": "$"
+    }
+  },
+  "capital": [
+    "Bogotá"
+  ],
+  "region": "Americas",
+  "subregion": "South America",
+  "languages": {
+    "spa": "Spanish"
+  },
+  "borders": [
+    "BRA",
+    "ECU",
+    "PAN",
+    "PER",
+    "VEN"
+  ],
+  "population": 50882884,
 };

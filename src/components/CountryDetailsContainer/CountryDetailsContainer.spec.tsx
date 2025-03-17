@@ -1,12 +1,12 @@
 import { RecoilRoot } from "recoil";
-import { screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { vi } from "vitest";
 import CountryDetailsContainer from ".";
 import { useCountryNamesFromCodes } from "src/common/states/hook/useCountryNamesFromCodes";
 import customRender from "src/tests/utils/customRender";
 import { errorStatusState, selectedCountryState } from "src/common/states/atom";
-import { mockCountryDetails } from "src/__mocks__/countryDetailsMock";
+import { mockBrazilCountryDetails, mockColombiaCountryDetails } from "src/__mocks__/countryDetailsMock";
 import { mockBorderCountriesData } from "src/__mocks__/borderCountriesDataMock";
 import { MemoryRouter } from "react-router-dom";
 import { ICountry } from "src/common/interfaces/ICountry";
@@ -39,6 +39,12 @@ const renderWithRecoil = (errorStatusValue: boolean, selectedCountryValue: ICoun
 describe("<CountryDetailsContainer />", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+
+    vi.mocked(useCountryNamesFromCodes).mockReturnValue({
+      borderCountriesData: [],
+      isLoading: false,
+      isError: false,
+    });
   });
 
   it("Should render the skeleton when isLoading is true", () => {
@@ -53,12 +59,6 @@ describe("<CountryDetailsContainer />", () => {
   });
 
   it("Should display an error message when errorStatus is true", () => {
-    vi.mocked(useCountryNamesFromCodes).mockReturnValue({
-      borderCountriesData: [],
-      isLoading: false,
-      isError: false,
-    });
-
     renderWithRecoil(true);
 
     const messageError = "We are currently experiencing technical difficulties. Please try again later.";
@@ -66,13 +66,7 @@ describe("<CountryDetailsContainer />", () => {
   });
 
   it('Should correctly render country details', () => {
-    vi.mocked(useCountryNamesFromCodes).mockReturnValue({
-      borderCountriesData: [],
-      isLoading: false,
-      isError: false,
-    });
-
-    renderWithRecoil(false, mockCountryDetails);
+    renderWithRecoil(false, mockBrazilCountryDetails);
 
     expect(screen.getByRole("img")).toHaveAttribute("src", "https://flagcdn.com/br.svg");
     expect(screen.getByRole("heading", { level: 2, name: "Brazil" })).toBeInTheDocument();
@@ -86,13 +80,7 @@ describe("<CountryDetailsContainer />", () => {
   });
 
   it('Should correctly join the border countries', () => {
-    vi.mocked(useCountryNamesFromCodes).mockReturnValue({
-      borderCountriesData: [],
-      isLoading: false,
-      isError: false,
-    });
-
-    const bordersCountries = mockCountryDetails.borders.join(",");
+    const bordersCountries = mockBrazilCountryDetails.borders.join(",");
 
     expect(bordersCountries).toBe("ARG,BOL,COL,GUF,GUY,PRY,PER,SUR,URY,VEN");
   });
@@ -116,5 +104,22 @@ describe("<CountryDetailsContainer />", () => {
     expect(screen.getByRole("link", { name: "Bolivia"})).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Argentina"})).toBeInTheDocument();
   });
-  
+
+  it('Should not render Brasilia when clicking on another country', () => {
+    vi.mocked(useCountryNamesFromCodes).mockReturnValue({
+      borderCountriesData: mockBorderCountriesData,
+      isLoading: false,
+      isError: false,
+    });
+
+    renderWithRecoil(false);
+
+    const borderCountryColombia = screen.getByRole("link", { name: "Colombia"});
+
+    fireEvent.click(borderCountryColombia);
+
+    renderWithRecoil(false, mockColombiaCountryDetails);
+
+    expect(screen.queryByText("Brasília")).not.toBeInTheDocument();
+  });
 });
