@@ -15,20 +15,21 @@ OK - FilterSelect {
   Testar renderização da option selecionada
 }
 
-CountryCard {
-  OK - Testar renderização do Skeleton
-  OK - Testar Renderização dos 8 cards e seus elementos (img, title, paragrafos)
-  OK - Testar se ao clicar leva para o endpoint `/overview`
+OK - CountryCard {
+  Testar renderização do Skeleton
+  Testar Renderização dos 8 cards e seus elementos (img, title, paragrafos)
+  Testar se ao clicar leva para o endpoint `/overview`
   Testar se tiver uma lista de países no input ou select, é renderizado tudo.  -> Integração
 }
 
-CountryOverview {
-  Testar renderização do Botão `Back`
-  Testar renderização de componentes
-}
-
-CountryDetailsContainer {
-  Testar renderização do componente
+OK - CountryDetailsContainer {
+  Testar renderização do Skeeleton
+  Testar renderização do MessageError
   Testar renderização dos elementos (img, descriptions, sugestões)
   Testar se sugestões é clicável
+}
+
+OK - CountryOverview {
+  Testar renderização do Botão `Back`
+  Testar Back para a homepage "/"
 }

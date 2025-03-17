@@ -138,6 +138,8 @@ export default function CountryDetailsContainer() {
   const country = Array.isArray(selectedCountry) ? selectedCountry[0] : selectedCountry;
   const { borderCountriesData, isLoading } = useCountryNamesFromCodes(country);
 
+  console.log('country: ', country);
+
   const animation = animatedTransition();
   useSessionStorage();
 

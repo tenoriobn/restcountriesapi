@@ -3,7 +3,7 @@ import { BorderCountriesContainer, CountryDetails, CountryDetailsWrapper, Countr
 
 export default function SkeletonCountryDetailsContainer() {
   return (
-    <CountryDetailsWrapper>
+    <CountryDetailsWrapper data-testid="skeleton-country-details">
       <p className="country-flag" style={{ borderRadius: '4px' }} >
         <Skeleton 
           style={{ height: '100%' }}

@@ -1,7 +1,7 @@
 export interface IFlags {
   png: string;
   svg: string;
-  alt: string;
+  alt?: string;
 }
 
 export interface IName {
@@ -37,4 +37,5 @@ export interface ICountry {
   currencies: ICurrencies;
   languages: { [key: string]: string };
   borders: string[];
+  [key: string]: unknown; 
 }
