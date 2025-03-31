@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { useRecoilState } from "recoil";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import ArrowIcon from "src/assets/icons/select-arrow.svg?react";
 import options from "./options.json";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions"; 
+import useOutSideClick from "src/common/states/hook/useOutSideClick";
 
 const Container = styled.div`
   position: relative;
@@ -116,23 +117,9 @@ const SelectArrowIcon = styled(ArrowIcon)<{  $optionSelect: string | null; $open
 export default function FilterSelect() {
   const [openListOptions, setOpenListOptions] = useState(false);
   const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
+  useOutSideClick(setOpenListOptions);
 
-  useEffect(() => {
-    const handleOutsideClick = (event: MouseEvent) => {
-      const clickedOutsideContainer = event.target as HTMLElement;
-      if (!clickedOutsideContainer.closest('#filter-select-container')) {
-        setOpenListOptions(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleOutsideClick);
-
-    return () => {
-      document.removeEventListener('mousedown', handleOutsideClick);
-    };
-  }, []);
-
-  return (
+  const MemoFilterSelect = useMemo(() => (
     <Container id="filter-select-container" data-testid="filter-select-container">
       <FilterSelectWrapper 
         role="combobox"
@@ -142,7 +129,6 @@ export default function FilterSelect() {
         $openListOptions={openListOptions}
       >
         <Label 
-          // data-testid="label"
           id="region-label"
           className="labelline" 
           $optionSelect={countryFilter ? countryFilter.select ?? null : null}
@@ -180,5 +166,11 @@ export default function FilterSelect() {
         }
       </ListOptions>
     </Container>
+  ), [countryFilter, openListOptions, setCountryFilter]);
+
+  return (
+    <>
+      {MemoFilterSelect}
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { useRecoilState } from "recoil";
 import { countryFilterState } from "src/common/states/atom";
 import { transitions } from "src/common/Themes/transitions";
 import Search from "src/assets/icons/Search.svg?react";
+import { memo, useMemo } from "react";
 
 const FilterInputWrapper = styled.div`
   background-color: ${({ theme }) => theme.secondaryBg};
@@ -82,6 +83,13 @@ const Label = styled.label`
 export default function FilterInput() {
   const [countryFilter, setCountryFilter] = useRecoilState(countryFilterState);
 
+  const MemoLabel = useMemo(() => (
+    <Label className="labelline" htmlFor="filter-country">
+      <MemoSearchIcon />
+      Search for a country...
+    </Label>
+  ), []);
+
   return (
     <FilterInputWrapper>
       <Input 
@@ -91,10 +99,10 @@ export default function FilterInput() {
         onChange={(e) => setCountryFilter({...countryFilter, input: e.target.value})} 
         required 
       />
-      <Label className="labelline" htmlFor="filter-country">
-        <Search />
-        Search for a country...
-      </Label>
+
+      {MemoLabel}
     </FilterInputWrapper>
   );
 }
+
+const MemoSearchIcon = memo(Search as unknown as React.FC);
