@@ -1,4 +1,4 @@
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { motion } from 'framer-motion';
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -10,8 +10,6 @@ import SkeletonCountryCard from "./SkeletonCountryCard";
 import { useCardLimitByScreenSize } from "src/common/states/hook/useCardLimitByScreenSize";
 import MessageError from "../MessageError";
 import { animatedTransition, transitions } from "src/common/Themes/transitions";
-import { Suspense } from "react";
-import Skeleton from "react-loading-skeleton";
 
 export const CardsContainerWrapper = styled.div`
   display: flex;
@@ -138,7 +136,6 @@ export default function CountryCard() {
   const { filteredCountries, isLoading, isError } = useFilteredCountries(countryFilter?.input, countryFilter?.select);
   const { limit, setLimit } = useCardLimitByScreenSize();
   const animation = animatedTransition();
-  const theme = useTheme();
 
   if (isLoading) {
     return <SkeletonCountryCard />;
@@ -163,9 +160,11 @@ export default function CountryCard() {
               onClick={() => setSelectedCountry(country)}
             >
               <motion.article {...animation}>
-                <Suspense fallback={ <Skeleton height={160} baseColor={theme.skeletonBaseColorImg}   />}>								
-                  <img src={country.flags.png} alt={country.flags.alt} loading='lazy' />
-                </Suspense>	
+                <img 
+                  src={country.flags.png} 
+                  alt={country.flags.alt || country.name.common} 
+                  loading='lazy' 
+                />
 
                 <CountryCardDetails>
                   <h2>{country.name.common}</h2>
