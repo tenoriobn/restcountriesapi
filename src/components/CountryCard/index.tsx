@@ -160,7 +160,11 @@ export default function CountryCard() {
               onClick={() => setSelectedCountry(country)}
             >
               <motion.article {...animation}>
-                <img src={country.flags.png} alt={`Bandeira - ${country.name.common}`} />
+                <img 
+                  src={country.flags.png} 
+                  alt={country.flags.alt || country.name.common} 
+                  loading='lazy' 
+                />
 
                 <CountryCardDetails>
                   <h2>{country.name.common}</h2>

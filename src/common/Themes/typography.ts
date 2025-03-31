@@ -1,6 +1,6 @@
 const typography = {
   fonts: {
-    nunito: 'Nunito Sans',
+    nunito: 'Nunito Sans, sans-serif',
   }
 };
 

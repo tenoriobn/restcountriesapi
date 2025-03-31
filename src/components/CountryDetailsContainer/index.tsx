@@ -162,7 +162,7 @@ export default function CountryDetailsContainer() {
           className="country-flag"
           src={country?.flags.svg}
           alt={`Bandeira - ${country?.name.common}`}
-          loading="lazy"
+          loading='lazy'
         />
       </a>
 
