@@ -42,6 +42,7 @@ export const CountryCardsContainer = styled.div`
       img {
         width: 100%;
         height: 198px;
+        aspect-ratio: 3 / 2;
         object-fit: cover;
         border-bottom: .0625rem solid ${({ theme }) => theme.borderColor};
       }
@@ -163,7 +164,6 @@ export default function CountryCard() {
                 <img 
                   src={country.flags.png} 
                   alt={country.flags.alt || country.name.common} 
-                  loading='lazy' 
                 />
 
                 <CountryCardDetails>

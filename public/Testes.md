@@ -38,6 +38,5 @@ OK - CountryOverview {
 
 
 ---- Iniciar otimização para melhor performance no projeto ---
- * Fazer testes para entender como está a performance
- * Com base nos resultados entender o que precisa ser otimizado para melhor performance (Ex: imagens .webp )
- * Metricas (tempo de resposta da API, tempo de renderização do React e uso de memória.)
+ * Com base no Lighthouse fazer melhor otimização do que é apontado
+ * Conferir Profiler para que não tenha re-renderizações desnecessárias.
